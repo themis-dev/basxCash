@@ -12,6 +12,8 @@ import Stake from './components/Stake';
 import useBank from '../../hooks/useBank';
 import useRedeem from '../../hooks/useRedeem';
 import { Bank as BankEntity } from '../../basis-cash';
+import bankIcon from '../../assets/img/bank.svg'
+
 
 const Bank: React.FC = () => {
   useEffect(() => window.scrollTo(0, 0));
@@ -25,7 +27,7 @@ const Bank: React.FC = () => {
   return account && bank ? (
     <>
       <PageHeader
-        icon="🏦"
+        icon={bankIcon}
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />

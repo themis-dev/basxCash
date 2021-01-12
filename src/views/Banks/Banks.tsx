@@ -7,6 +7,8 @@ import BankCards from './BankCards';
 import { useWallet } from 'use-wallet';
 import Button from '../../components/Button';
 import styled from 'styled-components';
+import bank from '../../assets/img/bank.svg'
+
 
 const Banks: React.FC = () => {
   const { path } = useRouteMatch();
@@ -17,7 +19,7 @@ const Banks: React.FC = () => {
       <Page>
         <Route exact path={path}>
           <PageHeader
-            icon={'🏦'}
+            icon={bank}
             title="Pick a Bank."
             subtitle="Earn BasisX Shares by providing liquidity"
           />

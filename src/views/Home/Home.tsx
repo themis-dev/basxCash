@@ -8,6 +8,7 @@ import { OverviewData } from './types';
 import useBasisCash from '../../hooks/useBasisCash';
 import config from '../../config';
 import Notice from '../../components/Notice';
+import welcome from '../../assets/img/welcome.png'
 
 const Home: React.FC = () => {
   const basisCash = useBasisCash();
@@ -40,14 +41,14 @@ const Home: React.FC = () => {
   return (
     <Page>
       <PageHeader
-        icon="👋"
-        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on Mdex"
-        title="Welcome to BasisX Cash!"
+        icon={welcome}
+        subtitle="Buy, sell, and provide liquidity for Basis Cash and Basis Shares on Uniswap"
+        title="Welcome to Basis Cash!"
       />
       <Spacer size="md" />
       <CardWrapper>
         <HomeCard
-          title="BasisX Cash"
+          title="Basis Cash"
           symbol="BAC"
           color="#facf09"
           supplyLabel="Circulating Supply"
@@ -56,7 +57,7 @@ const Home: React.FC = () => {
         />
         <Spacer size="lg" />
         <HomeCard
-          title="BasisX Share"
+          title="Basis Share"
           symbol="BAS"
           color="#EEA7ED"
           address={shareAddr}
@@ -64,7 +65,7 @@ const Home: React.FC = () => {
         />
         <Spacer size="lg" />
         <HomeCard
-          title="BasisX Bond"
+          title="Basis Bond"
           symbol="BAB"
           color="#ECF25C"
           address={bondAddr}

@@ -18,6 +18,8 @@ import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../basis-cash/constants';
+import bank from '../../assets/img/bank.svg'
+
 
 const Bond: React.FC = () => {
   const { path } = useRouteMatch();
@@ -58,7 +60,7 @@ const Bond: React.FC = () => {
       <Switch>
         <Page>
           <PageHeader
-            icon={'🏦'}
+            icon={bank}
             title="Buy & Redeem Bonds"
             subtitle="Earn premiums upon redemption"
           />
@@ -78,7 +80,7 @@ const Bond: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={'🏦'}
+                icon={bank}
                 title="Buy & Redeem Bonds"
                 subtitle="Earn premiums upon redemption"
               />
