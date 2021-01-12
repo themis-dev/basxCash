@@ -27,6 +27,11 @@ const StyledPageHeader = styled.div`
   max-width: 512px;
   width: 100%;
   margin: 0 auto;
+  text-align:center;
+  @media (max-width: 768px) {
+    padding-bottom: 60px;
+    padding-top: 60px
+  }
 `
 
 const StyledIcon = styled.div`

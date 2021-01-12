@@ -19,6 +19,7 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
 `
 
 const StyledLink = styled.a`
@@ -28,7 +29,10 @@ const StyledLink = styled.a`
   text-decoration: none;
   &:hover {
     color: ${props => props.theme.color.grey[500]};
-  }
+  },
+  display:inline-block;
+  margin-bottom:10px
+ 
 `
 const buyBAS ="https://uniswap.exchange/swap?inputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f&outputCurrency=0xa7ed29b253d8b4e3109ce07c80fc570f81b63696";
 const buyBAC= "https://uniswap.exchange/swap?inputCurrency=0x3449fc1cd036255ba1eb19d65ff4ba2b8903a69a&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f"

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import farmer from '../../assets/img/farmer.png';
+import farmer from '../../assets/img/farmer.svg';
 
 const Logo: React.FC = () => {
   return (
@@ -15,6 +15,9 @@ const Logo: React.FC = () => {
 const StyledLogo = styled.div`
   align-items: center;
   display: flex;
+  @media (max-width: 768px) {
+    margin-bottom:10px
+  }
 `;
 
 const StyledLink = styled.a`
@@ -23,6 +26,7 @@ const StyledLink = styled.a`
   font-size: 18px;
   font-weight: 700;
   margin-left: ${(props) => props.theme.spacing[2]}px;
+   
 `;
 
 export default Logo;

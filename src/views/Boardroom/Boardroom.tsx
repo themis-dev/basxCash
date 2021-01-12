@@ -189,11 +189,14 @@ const StyledHeader = styled.div`
     flex: 1;
     height: 84px;
     margin: 0 ${(props) => props.theme.spacing[2]}px;
+     @media (max-width: 768px) {
+        margin-bottom:10px
+      }
   }
 
   @media (max-width: 768px) {
     flex-direction: column;
-    width: 100%;
+    width: 81%;
   }
 `;
 

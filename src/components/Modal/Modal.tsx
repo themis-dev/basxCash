@@ -11,13 +11,16 @@ export interface ModalProps {
 
 const Modal: React.FC = ({ children }) => {
   return (
-    <Container size="sm">
-      <StyledModal>
-        <Card>
-          <CardContent>{children}</CardContent>
-        </Card>
-      </StyledModal>
-    </Container>
+      <StyledModalSM>
+          <Container size="sm">
+              <StyledModal>
+                  <Card>
+                      <CardContent>{children}</CardContent>
+                  </Card>
+              </StyledModal>
+          </Container>
+      </StyledModalSM>
+
   );
 };
 
@@ -25,6 +28,12 @@ const StyledModal = styled.div`
   border-radius: 12px;
   box-shadow: 24px 24px 48px -24px ${(props) => props.theme.color.grey[900]};
   position: relative;
+`;
+const StyledModalSM = styled.div`
+  width:100%;
+  @media (max-width: 768px) {
+   width:90%
+  }
 `;
 
 export default Modal;
