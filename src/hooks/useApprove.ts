@@ -21,7 +21,6 @@ function useApprove(token: ERC20, spender: string): [ApprovalState, () => Promis
   // console.log(token)
   // console.log(spender)
   // console.log(pendingApproval)
-console.log(currentAllowance)
   // check the current approval status
   const approvalState: ApprovalState = useMemo(() => {
     // we might not have enough data to know whether or not we need to approve
@@ -53,7 +52,6 @@ console.log(currentAllowance)
       },
     });
   }, [approvalState, token, spender, addTransaction]);
-  console.log(approvalState)
   return [approvalState, approve];
 }
 

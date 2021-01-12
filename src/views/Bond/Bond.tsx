@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
-
+// import { BigNumber } from 'ethers';
 import Button from '../../components/Button';
 import Page from '../../components/Page';
 import PageHeader from '../../components/PageHeader';
@@ -25,8 +25,10 @@ const Bond: React.FC = () => {
   const basisCash = useBasisCash();
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
-  const cashPrice = useBondOraclePriceInLastTWAP();
+  let cashPrice = useBondOraclePriceInLastTWAP();
+  // const decimals = BigNumber.from(10).pow(8);
 
+  // cashPrice = cashPrice.mul(decimals)
   const bondBalance = useTokenBalance(basisCash?.BAB);
 
   const handleBuyBonds = useCallback(

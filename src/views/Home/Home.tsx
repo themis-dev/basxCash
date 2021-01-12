@@ -41,7 +41,7 @@ const Home: React.FC = () => {
     <Page>
       <PageHeader
         icon="👋"
-        subtitle="Buy, sell, and provide liquidity for Basis Cash and Basis Shares on Uniswap"
+        subtitle="Buy, sell, and provide liquidity for Basis Cash and Basis Shares on Mdex"
         title="Welcome to Basis Cash!"
       />
       <Spacer size="md" />

@@ -9,7 +9,7 @@ import { getDisplayBalance } from '../utils/formatBalance';
 import { getDefaultProvider } from '../utils/provider';
 import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
 import { value } from 'numeral';
-
+import BN from "bignumber.js"
 
 /**
  * An API module of Basis Cash contracts.
@@ -120,13 +120,14 @@ export class BasisCash {
     const totalSupply = await this.BAC.displayedTotalSupply();
 
     // estimate current TWAP price
-    const cumulativePrice: BigNumber = await this.bacDai.price0CumulativeLast();
-    const cumulativePriceLast = await Oracle.price0CumulativeLast();
+    const cumulativePrice: BigNumber = await this.bacDai.price1CumulativeLast();
+    const cumulativePriceLast = await Oracle.price1CumulativeLast();
 
-    console.log(cumulativePrice)
+    // console.log(cumulativePrice)
 
     const denominator112 = BigNumber.from(2).pow(112);
     const denominator1e18 = BigNumber.from(10).pow(18);
+    const denominator1e10 = BigNumber.from(10).pow(10);
 
     if (cumulativePrice.toString() === cumulativePriceLast.toString()) {
       const oldTWAPOracle = await Oracle.price0Average();
@@ -145,8 +146,9 @@ export class BasisCash {
       .sub(cumulativePriceLast)
       .mul(denominator1e18)
       .div(elapsedSec)
-      .div(denominator112);
-
+      .div(denominator112)
+      .mul(denominator1e10);
+      
     return {
       priceInDAI: getDisplayBalance(cashPriceTWAP),
       totalSupply,
@@ -158,6 +160,12 @@ export class BasisCash {
     return Treasury.getSeigniorageOraclePrice();
   }
 
+  async getCashPriceOne(): Promise<BigNumber> {
+    const { Treasury } = this.contracts;
+   
+    return Treasury.cashPriceOne();
+  }
+
   async getBondOraclePriceInLastTWAP(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.getBondOraclePrice();
@@ -165,10 +173,8 @@ export class BasisCash {
 
   async getBondStat(): Promise<TokenStat> {
     const decimals = BigNumber.from(10).pow(18);
-
     const cashPrice: BigNumber = await this.getBondOraclePriceInLastTWAP();
     const bondPrice = cashPrice.pow(2).div(decimals);
-
     return {
       priceInDAI: getDisplayBalance(bondPrice),
       totalSupply: await this.BAB.displayedTotalSupply(),
@@ -309,7 +315,6 @@ export class BasisCash {
   }
 
   boardroomByVersion(version: string): Contract {
-    console.log(version)
     if (version === 'v1') {
       return this.contracts.Boardroom1;
     }
@@ -376,7 +381,9 @@ export class BasisCash {
     const { Treasury } = this.contracts;
     const nextEpochTimestamp: BigNumber = await Treasury.nextEpochPoint();
     const period: BigNumber = await Treasury.getPeriod();
-
+    
+    console.log(nextEpochTimestamp)
+    console.log(period)
     const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
     const prevAllocation = new Date(nextAllocation.getTime() - period.toNumber() * 1000);
     return { prevAllocation, nextAllocation };

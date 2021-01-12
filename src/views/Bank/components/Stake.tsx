@@ -74,7 +74,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
             <Label text={`${bank.depositTokenName} Staked`} />
           </StyledCardHeader>
           <StyledCardActions>
-            {approveStatus !== ApprovalState.APPROVED ? (
+            {approveStatus !== ApprovalState.APPROVED && bank.depositToken.symbol !== 'HT' ? (
               <Button
                 disabled={
                   approveStatus == ApprovalState.PENDING ||
