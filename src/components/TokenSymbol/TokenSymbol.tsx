@@ -1,12 +1,12 @@
 import React from 'react';
 
-import bacLogo from '../../assets/img/basis-cash-logo.svg';
-import basLogo from '../../assets/img/basis-share-logo.svg';
-import babLogo from '../../assets/img/basis-bond-logo.svg';
+import bacLogo from '../../assets/img/basis-share-logo.png';
+import basLogo from '../../assets/img/basis-cash-logo.png';
+import babLogo from '../../assets/img/basis-bond-logo.png';
 import yCRVLogo from '../../assets/img/ycrv.png';
-import HTLogo from '../../assets/img/DAI.png';
+import HTLogo from '../../assets/img/HT.png';
 import sUSDLogo from '../../assets/img/sUSD.png';
-import HUSDLogo from '../../assets/img/USDC.png';
+import HUSDLogo from '../../assets/img/HUSD.png';
 import USDTLogo from '../../assets/img/USDT.png';
 
 const logosBySymbol: {[title: string]: string} = {

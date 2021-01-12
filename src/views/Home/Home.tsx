@@ -49,7 +49,7 @@ const Home: React.FC = () => {
         <HomeCard
           title="Basis Cash"
           symbol="BAC"
-          color="#EEA7ED"
+          color="#facf09"
           supplyLabel="Circulating Supply"
           address={cashAddr}
           stat={cash}
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
         <HomeCard
           title="Basis Share"
           symbol="BAS"
-          color="#E83725"
+          color="#EEA7ED"
           address={shareAddr}
           stat={share}
         />
