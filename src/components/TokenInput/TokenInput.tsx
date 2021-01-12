@@ -50,6 +50,9 @@ const StyledTokenInput = styled.div`
 
 const StyledSpacer = styled.div`
   width: ${props => props.theme.spacing[3]}px;
+  @media (max-width: 768px) {
+    display:none
+  }
 `
 
 const StyledTokenAdornmentWrapper = styled.div`
@@ -70,6 +73,9 @@ const StyledMaxText = styled.div`
 const StyledTokenSymbol = styled.span`
   color: ${props => props.theme.color.grey[600]};
   font-weight: 700;
+  @media (max-width: 768px) {
+    display:none
+  }
 `
 
 export default TokenInput

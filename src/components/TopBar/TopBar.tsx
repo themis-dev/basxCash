@@ -13,18 +13,14 @@ const TopBar: React.FC = () => {
     <StyledTopBar>
       <Container size="lg">
         <StyledTopBarInner>
-          <div style={{ flex: 1 }}>
+          <StyledTopBarLeft>
             <Logo />
-          </div>
+          </StyledTopBarLeft>
           <Nav />
-          <div style={{
-            flex: 1,
-            display: 'flex',
-            justifyContent: 'flex-end'
-          }}>
+          <StyledTopBarRight>
             <TxButton />
             <AccountButton />
-          </div>
+          </StyledTopBarRight>
         </StyledTopBarInner>
       </Container>
     </StyledTopBar>
@@ -42,5 +38,18 @@ const StyledTopBarInner = styled.div`
   width: 100%;
   flex-wrap: wrap;
 `
+const StyledTopBarLeft = styled.div`
+  flex: 1
+           
+`
 
+const StyledTopBarRight = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    margin-top:10px
+  }
+`
 export default TopBar

@@ -72,6 +72,9 @@ const Balances = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-bottom: ${props => props.theme.spacing[4]}px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 const StyledBalanceWrapper = styled.div`

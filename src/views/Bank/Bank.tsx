@@ -112,6 +112,10 @@ const StyledLink = styled.a`
   font-weight: 700;
   text-decoration: none;
   color: ${(props) => props.theme.color.primary.main};
+  @media (max-width: 768px) {
+    width: 80%;
+    text-align:center
+  }
 `;
 
 const StyledCardsWrapper = styled.div`

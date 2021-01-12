@@ -31,6 +31,10 @@ const StyledLink = styled(NavLink)`
   &.active {
     color: ${props => props.theme.color.primary.main};
   }
+  @media (max-width: 768px) {
+    padding-left: ${props => props.theme.spacing[2]}px;
+    padding-right: ${props => props.theme.spacing[2]}px;
+  }
 `
 const StyledLink2 = styled.a`
   color: ${props => props.theme.color.grey[400]};
@@ -43,6 +47,10 @@ const StyledLink2 = styled.a`
   }
   &.active {
     color: ${props => props.theme.color.primary.main};
+  }
+   @media (max-width: 768px) {
+    padding-left: ${props => props.theme.spacing[2]}px;
+    padding-right: ${props => props.theme.spacing[2]}px;
   }
 `
 

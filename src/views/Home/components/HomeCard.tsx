@@ -62,13 +62,13 @@ const CardHeader = styled.h2`
 `;
 
 const StyledCards = styled.div`
-  min-width: 200px;
+  min-width: 250px;
   padding: ${(props) => props.theme.spacing[3]}px;
   color: ${(props) => props.theme.color.white};
   background-color: ${(props) => props.theme.color.grey[900]};
   border-radius: 5px;
   @media (max-width: 768px) {
-    width: 100%;
+    width: 0;
   }
 `;
 

@@ -19,6 +19,7 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
 `
 
 const StyledLink = styled.a`
@@ -28,7 +29,10 @@ const StyledLink = styled.a`
   text-decoration: none;
   &:hover {
     color: ${props => props.theme.color.grey[500]};
-  }
+  },
+  display:inline-block;
+  margin-bottom:10px
+ 
 `
 const buyBAS ="https://ht.mdex.com/#/swap";
 const buyBAC= "https://ht.mdex.com/#/swap"
