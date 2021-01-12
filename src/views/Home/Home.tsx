@@ -8,6 +8,7 @@ import { OverviewData } from './types';
 import useBasisCash from '../../hooks/useBasisCash';
 import config from '../../config';
 import Notice from '../../components/Notice';
+import welcome from '../../assets/img/welcome.png'
 
 const Home: React.FC = () => {
   const basisCash = useBasisCash();
@@ -40,7 +41,7 @@ const Home: React.FC = () => {
   return (
     <Page>
       <PageHeader
-        icon="👋"
+        icon={welcome}
         subtitle="Buy, sell, and provide liquidity for Basis Cash and Basis Shares on Uniswap"
         title="Welcome to Basis Cash!"
       />

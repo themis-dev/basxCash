@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface PageHeaderProps {
-  icon: React.ReactNode,
+  icon?: string,
   subtitle?: string,
   title?: string,
 }
@@ -10,7 +10,8 @@ interface PageHeaderProps {
 const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title }) => {
   return (
     <StyledPageHeader>
-      <StyledIcon>{icon}</StyledIcon>
+        <img src={icon} alt="home icon"/>
+      {/*<StyledIcon>{icon}</StyledIcon>*/}
       <StyledTitle>{title}</StyledTitle>
       <StyledSubtitle>{subtitle}</StyledSubtitle>
     </StyledPageHeader>

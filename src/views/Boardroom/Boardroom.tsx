@@ -24,6 +24,8 @@ import useTreasuryAllocationTimes from '../../hooks/useTreasuryAllocationTimes';
 import Notice from '../../components/Notice';
 import useBoardroomVersion from '../../hooks/useBoardroomVersion';
 import moment from 'moment';
+import join from '../../assets/img/join.png'
+
 
 const Boardroom: React.FC = () => {
   useEffect(() => window.scrollTo(0, 0));
@@ -73,7 +75,7 @@ const Boardroom: React.FC = () => {
       <Switch>
         <Page>
           <PageHeader
-            icon={'🤝'}
+            icon={join}
             title="Join the Boardroom"
             subtitle="Deposit Basis Shares and earn inflationary rewards"
           />
@@ -93,7 +95,7 @@ const Boardroom: React.FC = () => {
         {!!account ? (
           <>
             <PageHeader
-              icon={'🤝'}
+              icon={join}
               title="Join the Boardroom"
               subtitle="Deposit Basis Shares and earn inflationary rewards"
             />
