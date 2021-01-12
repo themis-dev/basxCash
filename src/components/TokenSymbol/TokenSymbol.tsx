@@ -18,8 +18,8 @@ const logosBySymbol: {[title: string]: string} = {
   'SUSD': sUSDLogo,
   'HUSD': HUSDLogo,
   'HBTC': USDTLogo,
-  'BAC_HUSD-LPv2': bacLogo,
-  'BAS_HUSD-LPv2': basLogo,
+  'BXC_HUSD-LP': bacLogo,
+  'BXS_HUSD-LP': basLogo,
 };
 
 type BasisLogoProps = {

@@ -49,7 +49,7 @@ export class BasisCash {
     console.log(this.contracts)
     // Uniswap V2 Pair
     this.bacDai = new Contract(
-      externalTokens['BAC_HUSD-LPv2'][0],
+      externalTokens['BXC_HUSD-LP'][0],
       IUniswapV2PairABI,
       provider,
     );

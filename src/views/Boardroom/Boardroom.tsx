@@ -76,13 +76,13 @@ const Boardroom: React.FC = () => {
           <PageHeader
             icon={'🤝'}
             title="Join the Boardroom"
-            subtitle="Deposit Basis Shares and earn inflationary rewards"
+            subtitle="Deposit BasisX Shares and earn inflationary rewards"
           />
-          <LaunchCountdown
+          {/* <LaunchCountdown
             deadline={config.boardroomLaunchesAt}
             description="How does the boardroom work?"
             descriptionLink="https://docs.basis.cash/mechanisms/stabilization-mechanism#expansionary-policy"
-          />
+          /> */}
         </Page>
       </Switch>
     );
@@ -96,7 +96,7 @@ const Boardroom: React.FC = () => {
             <PageHeader
               icon={'🤝'}
               title="Join the Boardroom"
-              subtitle="Deposit Basis Shares and earn inflationary rewards"
+              subtitle="Deposit BasisX Shares and earn inflationary rewards"
             />
             {migrateNotice}
             <StyledHeader>
@@ -108,7 +108,7 @@ const Boardroom: React.FC = () => {
               <Stat
                 icon="💵"
                 title={cashStat ? `$${cashStat.priceInDAI}` : '-'}
-                description="BAC Price (TWAP)"
+                description="BXC Price (TWAP)"
               />
               <Stat
                 icon="🚀"
