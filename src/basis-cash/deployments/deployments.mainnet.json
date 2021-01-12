@@ -5869,7 +5869,7 @@
       }
     ]
   },
-  "DAIBACLPTokenSharePool": {
+  "DAIBXCLPTokenSharePool": {
     "address": "0x067d4D3CE63450E74F880F86b5b52ea3edF9Db0f",
     "abi": [
       {
@@ -6346,7 +6346,7 @@
       }
     ]
   },
-  "DAIBASLPTokenSharePool": {
+  "DAIBXSLPTokenSharePool": {
     "address": "0x9569d4CD7AC5B010DA5697E952EFB1EC0Efb0D0a",
     "abi": [
       {

@@ -42,13 +42,13 @@ const Home: React.FC = () => {
     <Page>
       <PageHeader
         icon={welcome}
-        subtitle="Buy, sell, and provide liquidity for Basis Cash and Basis Shares on Uniswap"
-        title="Welcome to Basis Cash!"
+        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on Mdex"
+        title="Welcome to BasisX Cash!"
       />
       <Spacer size="md" />
       <CardWrapper>
         <HomeCard
-          title="Basis Cash"
+          title="BasisX Cash"
           symbol="BAC"
           color="#facf09"
           supplyLabel="Circulating Supply"
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
         />
         <Spacer size="lg" />
         <HomeCard
-          title="Basis Share"
+          title="BasisX Share"
           symbol="BAS"
           color="#EEA7ED"
           address={shareAddr}
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
         />
         <Spacer size="lg" />
         <HomeCard
-          title="Basis Bond"
+          title="BasisX Bond"
           symbol="BAB"
           color="#ECF25C"
           address={bondAddr}

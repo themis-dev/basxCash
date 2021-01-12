@@ -155,7 +155,7 @@ const StyledCards = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 900px;
+  width: 1000px;
   @media (max-width: 768px) {
     width: 100%;
   }

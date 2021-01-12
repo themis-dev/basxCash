@@ -3,21 +3,28 @@ import React from 'react';
 import bacLogo from '../../assets/img/basis-share-logo.png';
 import basLogo from '../../assets/img/basis-cash-logo.png';
 import babLogo from '../../assets/img/basis-bond-logo.png';
-import yCRVLogo from '../../assets/img/ycrv.png';
+import HPTLogo from '../../assets/img/HPT.png';
 import HTLogo from '../../assets/img/HT.png';
 import sUSDLogo from '../../assets/img/sUSD.png';
 import HUSDLogo from '../../assets/img/HUSD.png';
 import USDTLogo from '../../assets/img/USDT.png';
+import DOTLogo from '../../assets/img/HDOT.png';
+import FILLogo from '../../assets/img/HFIL.png';
 
 const logosBySymbol: {[title: string]: string} = {
   'BAC': bacLogo,
   'BAB': babLogo,
   'BAS': basLogo,
-  'HPT': yCRVLogo,
+  'BXC': bacLogo,
+  'BXB': babLogo,
+  'BXS': basLogo,
+  'HPT': HPTLogo,
   'HT': HTLogo,
   'SUSD': sUSDLogo,
   'HUSD': HUSDLogo,
   'HBTC': USDTLogo,
+  'HDOT': DOTLogo,
+  'HFIL': FILLogo,
   'BXC_HUSD-LP': bacLogo,
   'BXS_HUSD-LP': basLogo,
 };

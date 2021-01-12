@@ -38,7 +38,7 @@ const Bond: React.FC = () => {
       const tx = await basisCash.buyBonds(amount);
       const bondAmount = Number(amount) / Number(getDisplayBalance(cashPrice));
       addTransaction(tx, {
-        summary: `Buy ${bondAmount.toFixed(2)} BAB with ${amount} BAC`,
+        summary: `Buy ${bondAmount.toFixed(2)} BXB with ${amount} BXC`,
       });
     },
     [basisCash, addTransaction, cashPrice],
@@ -47,7 +47,7 @@ const Bond: React.FC = () => {
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
       const tx = await basisCash.redeemBonds(amount);
-      addTransaction(tx, { summary: `Redeem ${amount} BAB` });
+      addTransaction(tx, { summary: `Redeem ${amount} BXB` });
     },
     [basisCash, addTransaction],
   );
@@ -95,10 +95,10 @@ const Bond: React.FC = () => {
                   toTokenName="BasisX Bond"
                   priceDesc={
                     !isBondPurchasable
-                      ? 'BAC is over $1'
+                      ? 'BXC is over $1'
                       : `${Math.floor(
                           100 / Number(bondStat.priceInDAI) - 100,
-                        )}% return when BAC > $1`
+                        )}% return when BXC > $1`
                   }
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}
@@ -106,14 +106,14 @@ const Bond: React.FC = () => {
               </StyledCardWrapper>
               <StyledStatsWrapper>
                 <ExchangeStat
-                  tokenName="BAC"
+                  tokenName="BXC"
                   description="Last-Hour TWAP Price"
                   price={getDisplayBalance(cashPrice, 18, 2)}
                 />
                 <Spacer size="md" />
                 <ExchangeStat
-                  tokenName="BAB"
-                  description="Current Price: (BAC)^2"
+                  tokenName="BXB"
+                  description="Current Price: (BXC)^2"
                   price={bondStat?.priceInDAI || '-'}
                 />
               </StyledStatsWrapper>
@@ -127,7 +127,7 @@ const Bond: React.FC = () => {
                   priceDesc={`${getDisplayBalance(bondBalance)} BXB Available`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when BAC > $${BOND_REDEEM_PRICE}` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when BXC > $${BOND_REDEEM_PRICE}` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

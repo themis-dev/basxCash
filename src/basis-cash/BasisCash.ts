@@ -42,9 +42,9 @@ export class BasisCash {
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokens[symbol] = new ERC20(address, provider, symbol, decimal); // TODO: add decimal
     }
-    this.BAC = new ERC20(deployments.Cash.address, provider, 'BAC');
-    this.BAS = new ERC20(deployments.Share.address, provider, 'BAS');
-    this.BAB = new ERC20(deployments.Bond.address, provider, 'BAB');
+    this.BAC = new ERC20(deployments.Cash.address, provider, 'BXC');
+    this.BAS = new ERC20(deployments.Share.address, provider, 'BXS');
+    this.BAB = new ERC20(deployments.Bond.address, provider, 'BXB');
 
     console.log(this.contracts)
     // Uniswap V2 Pair
