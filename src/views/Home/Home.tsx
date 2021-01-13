@@ -40,8 +40,9 @@ const Home: React.FC = () => {
     <Page>
       <PageHeader
         icon={welcome}
-        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on Mdex"
-        title="Welcome to BasisX Cash!"
+        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on"
+        titleA=" DaoSwap."
+        title="Welcome to BasisX!"
       />
       <Spacer size="md" />
       <CardWrapper>
@@ -68,6 +69,13 @@ const Home: React.FC = () => {
           color="#ECF25C"
           address={bondAddr}
           stat={bond}
+        />
+        <Spacer size="lg" />
+        <HomeCard
+            title="BasisX BTC"
+            symbol="BTC"
+            color="#59B9EB"
+            address=''
         />
       </CardWrapper>
     </Page>

@@ -10,6 +10,7 @@ import HUSDLogo from '../../assets/img/HUSD.png';
 import USDTLogo from '../../assets/img/USDT.png';
 import DOTLogo from '../../assets/img/HDOT.png';
 import FILLogo from '../../assets/img/HFIL.png';
+import BTCLogo from '../../assets/img/btc.png';
 
 const logosBySymbol: {[title: string]: string} = {
   'BAC': bacLogo,
@@ -27,6 +28,7 @@ const logosBySymbol: {[title: string]: string} = {
   'HFIL': FILLogo,
   'BXC_HUSD-LP': bacLogo,
   'BXS_HUSD-LP': basLogo,
+    'BTC': BTCLogo
 };
 
 type BasisLogoProps = {
