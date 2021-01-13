@@ -1,4 +1,4 @@
-import { Fetcher, Route, Token } from 'medxswap-sdk';
+import { Fetcher, Route, Token } from 'daoswap-sdk';
 import { Configuration } from './config';
 import { ContractName, TokenStat, TreasuryAllocationTime } from './types';
 import { BigNumber, Contract, ethers, Overrides } from 'ethers';
