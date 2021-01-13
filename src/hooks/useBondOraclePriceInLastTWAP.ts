@@ -21,9 +21,6 @@ const useBondOraclePriceInLastTWAP = () => {
     return () => clearInterval(refreshInterval);
   }, [setPrice, basisCash]);
 
-  console.log(basisCash)
-  console.log(price)
-
   return price;
 };
 

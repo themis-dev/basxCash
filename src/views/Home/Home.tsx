@@ -36,8 +36,6 @@ const Home: React.FC = () => {
   const shareAddr = useMemo(() => basisCash?.BAS.address, [basisCash]);
   const bondAddr = useMemo(() => basisCash?.BAB.address, [basisCash]);
 
-  console.log(cash)
-  console.log(cashAddr)
   return (
     <Page>
       <PageHeader

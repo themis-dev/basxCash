@@ -8,7 +8,6 @@ const useStakeToBoardroom = () => {
 
   const handleStake = useCallback(
     (amount: string) => {
-      console.log(amount)
       handleTransactionReceipt(
         basisCash.stakeShareToBoardroom(amount),
         `Stake ${amount} BXS to the boardroom`,

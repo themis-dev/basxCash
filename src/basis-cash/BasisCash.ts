@@ -46,7 +46,7 @@ export class BasisCash {
     this.BAS = new ERC20(deployments.Share.address, provider, 'BXS');
     this.BAB = new ERC20(deployments.Bond.address, provider, 'BXB');
 
-    console.log(this.contracts)
+    // console.log(this.contracts)
     // Uniswap V2 Pair
     this.bacDai = new Contract(
       externalTokens['BXC_HUSD-LP'][0],
@@ -75,7 +75,7 @@ export class BasisCash {
       token.connect(this.signer);
     }
     this.bacDai = this.bacDai.connect(this.signer);
-    console.log(this.bacDai)
+    // console.log(this.bacDai)
     console.log(`🔓 Wallet is unlocked. Welcome, ${account}!`);
     this.fetchBoardroomVersionOfUser()
       .then((version) => (this.boardroomVersionOfUser = version))
@@ -103,7 +103,7 @@ export class BasisCash {
    */
   async getCashStatFromUniswap(): Promise<TokenStat> {
     const supply = await this.BAC.displayedTotalSupply();
-    console.log(supply)
+    // console.log(supply)
     return {
       priceInDAI: await this.getTokenPriceFromUniswap(this.BAC),
       totalSupply: supply,
@@ -382,8 +382,6 @@ export class BasisCash {
     const nextEpochTimestamp: BigNumber = await Treasury.nextEpochPoint();
     const period: BigNumber = await Treasury.getPeriod();
     
-    console.log(nextEpochTimestamp)
-    console.log(period)
     const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
     const prevAllocation = new Date(nextAllocation.getTime() - period.toNumber() * 1000);
     return { prevAllocation, nextAllocation };

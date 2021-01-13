@@ -11,7 +11,6 @@ const useTokenBalance = (token: ERC20) => {
 
   const fetchBalance = useCallback(async () => {
     let amount = BigNumber.from(0);
-    console.log(token)
     if(token.symbol === 'HT') {
       const provider = getDefaultProvider();
       amount = await provider.getBalance(basisCash.myAccount);
