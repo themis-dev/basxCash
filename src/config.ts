@@ -18,8 +18,8 @@ const configurations: { [env: string]: Configuration } = {
       HUSD: ['0x0298c2b32eae4da002a15f36fdf7615bea3da047', 8], // HUSD
       HDOT: ['0xa2c49cee16a5e5bdefde931107dc1fae9f7773e3', 18],
       HFIL: ['0xae3a768f9ab104c69a7cd6041fe16ffa235d1810', 18],
-      'BXC_HUSD-LP': ['0xcAaB1e4BA67578627f53696D48da81f5D7DC3113', 18],
-      'BXS_HUSD-LP': ['0xC042600F92D164f53BD39272d5bfd510c23F548b', 18],
+      'BXC_HUSD-LP': ['0x06C91042810C3414EED172bD3B74bbD042933002', 18],
+      'BXS_HUSD-LP': ['0xC554294Dfee5e8E230C0e9434665FB0415E1363D', 18],
     },
     baseLaunchDate: new Date('2021-01-07T00:00:00Z'),
     bondLaunchesAt: new Date('2021-01-08T15:00:00Z'),
