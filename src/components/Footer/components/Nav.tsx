@@ -34,6 +34,6 @@ const StyledLink = styled.a`
   margin-bottom:10px
  
 `
-const buyBAS ="https://ht.mdex.com/#/swap";
-const buyBAC= "https://ht.mdex.com/#/swap"
+const buyBAS ="https://app.daoswap.pro/#/swap";
+const buyBAC= "https://app.daoswap.pro/#/swap"
 export default Nav

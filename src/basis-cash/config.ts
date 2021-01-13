@@ -1,5 +1,5 @@
 import { Deployments } from './deployments';
-import { ChainId } from 'medxswap-sdk';
+import { ChainId } from 'daoswap-sdk';
 
 export type Configuration = {
   chainId: ChainId,

@@ -40,7 +40,7 @@ const Home: React.FC = () => {
     <Page>
       <PageHeader
         icon={welcome}
-        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on Mdex"
+        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on Daoswap"
         title="Welcome to BasisX Cash!"
       />
       <Spacer size="md" />

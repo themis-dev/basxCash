@@ -61,15 +61,15 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   let pairName: string;
   let uniswapUrl: string;
   if (bank.depositTokenName.includes('BAC')) {
-    pairName = 'BAC-HUSD pair';
-    uniswapUrl = 'https://ht.mdex.com/#/swap';
+    pairName = 'BXC-HUSD pair';
+    uniswapUrl = 'https://app.daoswap.pro/#/swap';
   } else {
-    pairName = 'BAS-HUSD pair';
-    uniswapUrl = 'https://ht.mdex.com/#/swap';
+    pairName = 'BXS-HUSD pair';
+    uniswapUrl = 'https://app.daoswap.pro/#/swap';
   }
   return (
     <StyledLink href={uniswapUrl} target="_blank">
-      {`Provide liquidity to ${pairName} on Mdex`}
+      {`Provide liquidity to ${pairName} on Daoswap`}
     </StyledLink>
   );
 };
