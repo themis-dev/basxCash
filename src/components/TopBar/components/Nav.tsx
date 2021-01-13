@@ -9,7 +9,7 @@ const Nav: React.FC = () => {
       <StyledLink exact activeClassName="active" to="/bank">Bank</StyledLink>
       <StyledLink exact activeClassName="active" to="/bonds">Bonds</StyledLink>
       <StyledLink exact activeClassName="active" to="/boardroom">Boardroom</StyledLink>
-      {/* <StyledLink2 href="https://snapshot.page/#/basiscash.eth" target="_blank" >Vote</StyledLink2> */}
+      <StyledLink2 href="https://app.daoswap.pro/#/swap" target="_blank" >Swap</StyledLink2>
     </StyledNav>
   )
 }

@@ -28,23 +28,26 @@ const HomeCard: React.FC<HomeCardProps> = ({
   return (
     <Wrapper>
       <CardHeader>{title}</CardHeader>
-      <StyledCards>
-        <TokenSymbol symbol={symbol} />
-        <CardSection>
-          {stat ? (
-            <StyledValue>{(stat.priceInDAI !== '-' ? '$' : '') + stat.priceInDAI}</StyledValue>
-          ) : (
-            <ValueSkeleton />
-          )}
-          <Label text="Current Price" color={color} />
-        </CardSection>
-
-        <CardSection>
-          {stat ? <StyledValue>{commify(stat.totalSupply)}</StyledValue> : <ValueSkeleton />}
-          <StyledSupplyLabel href={tokenUrl} target="_blank" color={color}>
-            {supplyLabel}
-          </StyledSupplyLabel>
-        </CardSection>
+       <StyledCards>
+           { !address && <StyledSoon>Coming soon</StyledSoon> }
+           <StyledBlur color={address}>
+             <TokenSymbol symbol={symbol} />
+             <CardSection>
+                 {stat ? (
+                     <StyledValue>{(stat.priceInDAI !== '-' ? '$' : '') + stat.priceInDAI}</StyledValue>
+                 ) : (
+                     address ? <ValueSkeleton /> : <StyledValue>$0.00</StyledValue>
+                 )}
+               <Label text="Current Price" color={color} />
+             </CardSection>
+             <CardSection>
+                 {stat ? <StyledValue>{commify(stat.totalSupply)}</StyledValue> :  address ? <ValueSkeleton /> : <StyledValue>0.00</StyledValue>}
+               <StyledSupplyLabel href={tokenUrl} target="_blank" color={color}>
+                   {supplyLabel}
+               </StyledSupplyLabel>
+             </CardSection>
+               {!symbol && <StyledSoon>coming soon</StyledSoon>}
+           </StyledBlur>
       </StyledCards>
     </Wrapper>
   );
@@ -56,12 +59,25 @@ const Wrapper = styled.div`
   }
 `;
 
+const StyledSoon = styled.div`
+   position:absolute;
+   top:0;
+   left:0;
+   width: 100%;
+   text-align:center;
+   font-size: 38px;
+   z-index:999;
+   padding: 106px 0;
+   font-weight: 600;
+`;
+
 const CardHeader = styled.h2`
   color: #fff;
   text-align: center;
 `;
 
 const StyledCards = styled.div`
+  position:relative;
   min-width: 250px;
   padding: ${(props) => props.theme.spacing[3]}px;
   color: ${(props) => props.theme.color.white};
@@ -71,6 +87,14 @@ const StyledCards = styled.div`
     width: 0;
   }
 `;
+
+const StyledBlur = styled.div`
+   -webkit-filter:${(props) => props.color?'blur(0px)':'blur(2px)'}; /* Chrome, Opera */
+   -moz-filter: ${(props) => props.color?'blur(0px)':'blur(2px)'};
+   -ms-filter: ${(props) => props.color?'blur(0px)':'blur(2px)'};    
+   filter: ${(props) => props.color?'blur(0px)':'blur(3px)'};
+`;
+
 
 const StyledValue = styled.span`
   display: inline-block;
