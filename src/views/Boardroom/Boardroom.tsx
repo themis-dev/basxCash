@@ -80,11 +80,11 @@ const Boardroom: React.FC = () => {
             title="Join the Boardroom"
             subtitle="Deposit BasisX Shares and earn inflationary rewards"
           />
-          {/* <LaunchCountdown
+          <LaunchCountdown
             deadline={config.boardroomLaunchesAt}
-            description="How does the boardroom work?"
-            descriptionLink="https://docs.basis.cash/mechanisms/stabilization-mechanism#expansionary-policy"
-          /> */}
+            description=""
+            descriptionLink=""
+          />
         </Page>
       </Switch>
     );

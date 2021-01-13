@@ -22,7 +22,7 @@ const configurations: { [env: string]: Configuration } = {
       'BXS_HUSD-LP': ['0xC554294Dfee5e8E230C0e9434665FB0415E1363D', 18],
     },
     baseLaunchDate: new Date('2021-01-07T00:00:00Z'),
-    bondLaunchesAt: new Date('2021-01-08T15:00:00Z'),
+    bondLaunchesAt: new Date('2021-01-13T15:51:00Z'),
     boardroomLaunchesAt: new Date('2021-01-10T00:00:00Z'),
     refreshInterval: 10000,
     gasLimitMultiplier: 1.1,
