@@ -6,11 +6,11 @@ import babLogo from '../../assets/img/basis-bond-logo.png';
 import HPTLogo from '../../assets/img/HPT.png';
 import HTLogo from '../../assets/img/HT.png';
 import sUSDLogo from '../../assets/img/sUSD.png';
-import HUSDLogo from '../../assets/img/HUSD.png';
-import USDTLogo from '../../assets/img/USDT.png';
+import HBTCLogo from '../../assets/img/btc.png';
+import USDTLogo from '../../assets/img/usdt.png';
 import DOTLogo from '../../assets/img/HDOT.png';
 import ETHLogo from '../../assets/img/HETH.png';
-import BTCLogo from '../../assets/img/btc.png';
+import BTCLogo from '../../assets/img/btc1.png';
 
 const logosBySymbol: {[title: string]: string} = {
   'BAC': bacLogo,
@@ -22,12 +22,12 @@ const logosBySymbol: {[title: string]: string} = {
   'HPT': HPTLogo,
   'HT': HTLogo,
   'SUSD': sUSDLogo,
-  'HUSD': HUSDLogo,
-  'HBTC': USDTLogo,
+  'USDT(HECO)': USDTLogo,
+  'HBTC': HBTCLogo,
   'HDOT': DOTLogo,
   'HETH': ETHLogo,
-  'BXC_HUSD-LP': bacLogo,
-  'BXS_HUSD-LP': basLogo,
+  'BXC_USDT(HECO)-LP': bacLogo,
+  'BXS_USDT(HECO)-LP': basLogo,
     'BTC': BTCLogo
 };
 

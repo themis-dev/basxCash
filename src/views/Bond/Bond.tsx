@@ -43,7 +43,7 @@ const Bond: React.FC = () => {
           summary: `Buy ${bondAmount.toFixed(2)} BXB with ${amount} BXC`,
         });
       } else {
-        const message = `execution reverted: Bond sell out`;
+        const message = `error`;
         addPopup({ error: { message, stack: '' } });
       }
     },
@@ -58,10 +58,11 @@ const Bond: React.FC = () => {
     [basisCash, addTransaction],
   );
   const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
-  const isBondPurchasable = useMemo(() => Number(bondStat?.priceInDAI) < 1.0, [bondStat]);
+  const isBondPurchasable = useMemo(() => Number(bondStat?.priceInDAI) < 0.95, [bondStat]);
+
+  console.log(isBondPurchasable)
 
   const isLaunched = Date.now() >= config.bondLaunchesAt.getTime();
-  console.log(isLaunched)
   if (!isLaunched) {
     return (
       <Switch>
@@ -102,13 +103,13 @@ const Bond: React.FC = () => {
                   toTokenName="BasisX Bond"
                   priceDesc={
                     !isBondPurchasable
-                      ? 'BXC is over $1'
+                      ? 'BXC is over $0.95'
                       : `${Math.floor(
                           100 / Number(bondStat.priceInDAI) - 100,
-                        )}% return when BXC > $1`
+                        )}% return when BXC > $0.95`
                   }
                   onExchange={handleBuyBonds}
-                  disabled={!bondStat || isBondRedeemable}
+                  disabled={!isBondPurchasable || !bondStat || isBondRedeemable}
                 />
               </StyledCardWrapper>
               <StyledStatsWrapper>

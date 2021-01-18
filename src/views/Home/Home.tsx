@@ -52,27 +52,27 @@ const Home: React.FC = () => {
           symbol="BAC"
           color="#facf09"
           supplyLabel="Circulating Supply"
-          address=''
-          // address={cashAddr}
-          // stat={cash}
+          // address=''
+          address={cashAddr}
+          stat={cash}
         />
         <Spacer size="lg" />
         <HomeCard
           title="BasisX Share"
           symbol="BAS"
           color="#EEA7ED"
-          address=''
-          // address={shareAddr}
-          // stat={share}
+          // address=''
+          address={shareAddr}
+          stat={share}
         />
         <Spacer size="lg" />
         <HomeCard
           title="BasisX Bond"
           symbol="BAB"
           color="#ECF25C"
-          address=''
-          // address={bondAddr}
-          // stat={bond}
+          // address=''
+          address={bondAddr}
+          stat={bond}
         />
         <Spacer size="lg" />
         <HomeCard

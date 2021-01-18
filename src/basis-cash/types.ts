@@ -9,6 +9,7 @@ export interface BankInfo {
   earnTokenName: ContractName;
   sort: number;
   finished: boolean;
+  limit?:string
 }
 
 export interface Bank extends  BankInfo {

@@ -34,7 +34,6 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
   // TODO: reactive update of token balance
   const tokenBalance = useTokenBalance(bank.depositToken);
   const stakedBalance = useStakedBalance(bank.contract);
-  console.log(bank.depositToken)
 
   const { onStake } = useStake(bank);
   const { onWithdraw } = useWithdraw(bank);
@@ -63,6 +62,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     />,
   );
 // && bank.depositToken.symbol !== 'HT'
+ 
   return (
     <Card>
       <CardContent>
@@ -73,6 +73,9 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
             </CardIcon>
             <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal)} />
             <Label text={`${bank.depositTokenName} Staked`} />
+            {
+              bank.limit && <Label text={`Maximum Deposit: ${bank.limit}`} />
+            }
           </StyledCardHeader>
           <StyledCardActions>
             {approveStatus !== ApprovalState.APPROVED && bank.depositToken.symbol !== 'HT' ? (
