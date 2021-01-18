@@ -5,16 +5,19 @@ interface PageHeaderProps {
   icon?: string,
   subtitle?: string,
   title?: string,
-  titleA?:string
+  titleA?:string,
+  titleHome?:string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome }) => {
   return (
     <StyledPageHeader>
         <img src={icon} alt="home icon"/>
       {/*<StyledIcon>{icon}</StyledIcon>*/}
       <StyledTitle>{title}</StyledTitle>
-      <StyledSubtitle>{subtitle}{titleA && <StyledLink2 href="https://app.daoswap.pro/#/swap" target="_blank">{titleA}</StyledLink2>}</StyledSubtitle>
+      <StyledSubtitle>{subtitle}{titleA && <StyledLink2 href="https://ht.mdex.com/#/swap" target="_blank">{titleA}</StyledLink2>}</StyledSubtitle>
+      {/* <StyledSubtitle>{subtitle}</StyledSubtitle> */}
+      <StyledSubtitle>{titleHome}</StyledSubtitle>
     </StyledPageHeader>
   )
 }

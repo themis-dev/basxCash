@@ -9,7 +9,7 @@ import sUSDLogo from '../../assets/img/sUSD.png';
 import HUSDLogo from '../../assets/img/HUSD.png';
 import USDTLogo from '../../assets/img/USDT.png';
 import DOTLogo from '../../assets/img/HDOT.png';
-import FILLogo from '../../assets/img/HFIL.png';
+import ETHLogo from '../../assets/img/HETH.png';
 import BTCLogo from '../../assets/img/btc.png';
 
 const logosBySymbol: {[title: string]: string} = {
@@ -25,7 +25,7 @@ const logosBySymbol: {[title: string]: string} = {
   'HUSD': HUSDLogo,
   'HBTC': USDTLogo,
   'HDOT': DOTLogo,
-  'HFIL': FILLogo,
+  'HETH': ETHLogo,
   'BXC_HUSD-LP': bacLogo,
   'BXS_HUSD-LP': basLogo,
     'BTC': BTCLogo

@@ -19,6 +19,7 @@ import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../basis-cash/constants';
 import bank from '../../assets/img/bank.svg'
+import { useAddPopup } from '../../state/application/hooks';
 
 
 const Bond: React.FC = () => {
@@ -32,14 +33,19 @@ const Bond: React.FC = () => {
 
   // cashPrice = cashPrice.mul(decimals)
   const bondBalance = useTokenBalance(basisCash?.BAB);
-
+  const addPopup = useAddPopup();
   const handleBuyBonds = useCallback(
     async (amount: string) => {
       const tx = await basisCash.buyBonds(amount);
-      const bondAmount = Number(amount) / Number(getDisplayBalance(cashPrice));
-      addTransaction(tx, {
-        summary: `Buy ${bondAmount.toFixed(2)} BXB with ${amount} BXC`,
-      });
+      if (tx) {
+        const bondAmount = Number(amount) / Number(getDisplayBalance(cashPrice));
+        addTransaction(tx, {
+          summary: `Buy ${bondAmount.toFixed(2)} BXB with ${amount} BXC`,
+        });
+      } else {
+        const message = `execution reverted: Bond sell out`;
+        addPopup({ error: { message, stack: '' } });
+      }
     },
     [basisCash, addTransaction, cashPrice],
   );
@@ -55,6 +61,7 @@ const Bond: React.FC = () => {
   const isBondPurchasable = useMemo(() => Number(bondStat?.priceInDAI) < 1.0, [bondStat]);
 
   const isLaunched = Date.now() >= config.bondLaunchesAt.getTime();
+  console.log(isLaunched)
   if (!isLaunched) {
     return (
       <Switch>

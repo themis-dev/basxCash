@@ -34,6 +34,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
   // TODO: reactive update of token balance
   const tokenBalance = useTokenBalance(bank.depositToken);
   const stakedBalance = useStakedBalance(bank.contract);
+  console.log(bank.depositToken)
 
   const { onStake } = useStake(bank);
   const { onWithdraw } = useWithdraw(bank);

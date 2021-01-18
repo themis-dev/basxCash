@@ -10,6 +10,7 @@ export type Configuration = {
   config?: EthereumConfig,
 
   baseLaunchDate: Date,
+  bankLaunchesAt: Date,
   bondLaunchesAt: Date,
   boardroomLaunchesAt: Date,
 

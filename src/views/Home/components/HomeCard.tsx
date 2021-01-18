@@ -29,7 +29,18 @@ const HomeCard: React.FC<HomeCardProps> = ({
     <Wrapper>
       <CardHeader>{title}</CardHeader>
        <StyledCards>
-           { !address && <StyledSoon>Coming soon</StyledSoon> }
+         {
+           address === 'airdrop' ? 
+           <StyledAirdropSoon> 
+             <div>Airdrop</div>
+             Coming soon
+            </StyledAirdropSoon> : 
+             !address ?
+            <StyledSoon> 
+              Coming soon
+            </StyledSoon> : null
+         }
+         
            <StyledBlur color={address}>
              <TokenSymbol symbol={symbol} />
              <CardSection>
@@ -71,6 +82,18 @@ const StyledSoon = styled.div`
    font-weight: 600;
 `;
 
+const StyledAirdropSoon = styled.div`
+   position:absolute;
+   top:0;
+   left:0;
+   width: 100%;
+   text-align:center;
+   font-size: 38px;
+   z-index:999;
+   padding: 80px 0;
+   font-weight: 600;
+`;
+
 const CardHeader = styled.h2`
   color: #fff;
   text-align: center;
@@ -89,10 +112,10 @@ const StyledCards = styled.div`
 `;
 
 const StyledBlur = styled.div`
-   -webkit-filter:${(props) => props.color?'blur(0px)':'blur(2px)'}; /* Chrome, Opera */
-   -moz-filter: ${(props) => props.color?'blur(0px)':'blur(2px)'};
-   -ms-filter: ${(props) => props.color?'blur(0px)':'blur(2px)'};    
-   filter: ${(props) => props.color?'blur(0px)':'blur(3px)'};
+   -webkit-filter:${(props) => props.color && props.color ==='airdrop'?'blur(0px)':'blur(2px)'}; /* Chrome, Opera */
+   -moz-filter: ${(props) => props.color && props.color ==='airdrop'?'blur(0px)':'blur(2px)'};
+   -ms-filter: ${(props) => props.color && props.color ==='airdrop'?'blur(0px)':'blur(2px)'};    
+   filter: ${(props) => props.color && props.color !=='airdrop'?'blur(0px)':'blur(3px)'};
 `;
 
 
