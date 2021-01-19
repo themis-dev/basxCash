@@ -36,4 +36,4 @@ export const defaultEthereumConfig = {
   ethereumNodeTimeout: 10000,
 };
 
-export const apiUrl = 'https://api.basisx.io'
+export const apiUrl = 'http://192.168.3.106:8090' //'https://api.basisx.io'

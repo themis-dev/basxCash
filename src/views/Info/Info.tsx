@@ -1,15 +1,56 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import styled from 'styled-components';
 import Page from '../../components/Page';
+import axios from 'ts-axios-new'
+import { apiUrl } from '../../basis-cash/config';
+import { commify } from 'ethers/lib/utils';
+import { OverviewData, LpPoolData } from './types';
+import useBasisCash from '../../hooks/useBasisCash';
+import config from '../../config';
 
 const Info: React.FC = () => {
-    // const basisCash = useBasisCash();
+    const basisCash = useBasisCash();
+    const instance = axios.create();
+  
+    const [{ cash, bond, share }, setStats] = useState<OverviewData>({});
+    const fetchStats = useCallback(async () => {
+      const [cash, bond, share] = await Promise.all([
+        basisCash.getCashStatFromUniswap(),
+        basisCash.getBondStat(),
+        basisCash.getShareStat(),
+      ]);
+      if (Date.now() < config.bondLaunchesAt.getTime()) {
+        bond.priceInDAI = '-';
+      }
+      setStats({ cash, bond, share });
+    }, [basisCash, setStats]);
+
+    const [{ pool2, pool3 }, setPool] = useState<LpPoolData>({});
+    const fetchLPPool = useCallback(async() => {
+        const data = await instance.get(apiUrl + '/bxc/num')
+        const pool2 = data.data.data[0].balance
+        const pool3 = data.data.data[1].balance
+        setPool({ pool2, pool3 })
+    }, [setPool])
+
+    const [arr, setApyTvl] = useState<Array<any>>([]);
+    const fetchApyTvl = useCallback(async() => {
+        const data = await instance.get(apiUrl + '/getInfo')
+        const arr = data.data.data
+        // arr.map((v: { apy: any; }) => {
+        //     v.apy = v.apy
+        // })
+        console.log(arr)
+        setApyTvl(arr)
+    }, [setPool])
 
     useEffect(() => {
-        // if (basisCash) {
-        //
-        // }
-    }, []);
+        if (basisCash) {
+          fetchStats().catch((err) => console.error(err.stack));
+          fetchLPPool()
+          fetchApyTvl()
+        }
+      }, [basisCash]);
 
     return (
         <Page>
@@ -28,21 +69,21 @@ const Info: React.FC = () => {
                         <StyledTotalLeftLi>
                             <StyledSection>
                                 <StyledInfoBoxH3>Next Epoch</StyledInfoBoxH3>
-                                <StyledInfoBoxP>18:47:30</StyledInfoBoxP>
+                                <StyledInfoBoxP>-</StyledInfoBoxP>
                             </StyledSection>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC Spot Price</StyledInfoBoxH3>
-                                <StyledInfoBoxPRight>$0.000</StyledInfoBoxPRight>
+                                <StyledInfoBoxPRight>${cash?.priceInDAI}</StyledInfoBoxPRight>
                             </StyledSection>
                         </StyledTotalLeftLi>
                         <StyledTotalRightLi>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC TWAP Price</StyledInfoBoxH3>
-                                <StyledInfoBoxP>$0.000</StyledInfoBoxP>
+                                <StyledInfoBoxP>-</StyledInfoBoxP>
                             </StyledSection>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC Supply</StyledInfoBoxH3>
-                                <StyledInfoBoxPRight>0.000</StyledInfoBoxPRight>
+                                <StyledInfoBoxPRight>{cash?.totalSupply}</StyledInfoBoxPRight>
                             </StyledSection>
                         </StyledTotalRightLi>
                     </StyledTotalMsg>
@@ -50,23 +91,23 @@ const Info: React.FC = () => {
                         <StyledLeftLi>
                             <StyledInfoBoxH3>Supply</StyledInfoBoxH3>
                             <StyledOtherMsgSection>
-                                <StyledInfoBoxP>BAGS Circ Supply:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>1000001.000</StyledInfoBoxNum>
+                                <StyledInfoBoxP>BXS Supply:</StyledInfoBoxP>
+                                <StyledInfoBoxNum>{share?.totalSupply}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
-                                <StyledInfoBoxP>BAGB Supply:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>0.000</StyledInfoBoxNum>
+                                <StyledInfoBoxP>BXB Supply:</StyledInfoBoxP>
+                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                         </StyledLeftLi>
                         <StyledRightLi>
                             <StyledInfoBoxH3>Price</StyledInfoBoxH3>
                             <StyledOtherMsgSection>
-                                <StyledInfoBoxP>BAGS Price:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>$0.000</StyledInfoBoxNum>
+                                <StyledInfoBoxP>BXS Price:</StyledInfoBoxP>
+                                <StyledInfoBoxNum>${share?.priceInDAI}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
-                                <StyledInfoBoxP>BAGB Price:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>$0.000</StyledInfoBoxNum>
+                                <StyledInfoBoxP>BXB Price:</StyledInfoBoxP>
+                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                         </StyledRightLi>
                     </StyledOtherMsg>
@@ -75,21 +116,21 @@ const Info: React.FC = () => {
                             <StyledInfoBoxH3>BXC Metrics</StyledInfoBoxH3>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>Treasury BXC:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>0.00000</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>Unstaked BXC:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>0</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                         </StyledLeftLi>
                         <StyledRightLi>
                             <StyledOtherMsgSection>
-                                <StyledInfoBoxP>BXC in BXC/HUSD Pool:</StyledInfoBoxP>
-                                <StyledInfoBoxNum> 0.000</StyledInfoBoxNum>
+                                <StyledInfoBoxP>BXC in BXC/USDT Pool:</StyledInfoBoxP>
+                                <StyledInfoBoxNum>{(pool2)}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
-                                <StyledInfoBoxP>BXC in BXC/HBTC Pool:</StyledInfoBoxP>
-                                <StyledInfoBoxNum> 0.000</StyledInfoBoxNum>
+                                {/* <StyledInfoBoxP>BXC in BXC/HBTC Pool:</StyledInfoBoxP>
+                                <StyledInfoBoxNum> 0.000</StyledInfoBoxNum> */}
                             </StyledOtherMsgSection>
                         </StyledRightLi>
                     </StyledOtherMsg>
@@ -98,90 +139,51 @@ const Info: React.FC = () => {
                             <StyledInfoBoxH3>BXS Metrics</StyledInfoBoxH3>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>Boardroom BXS:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>0.00000</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>Unstaked BXS:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>1000001</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                         </StyledLeftLi>
                         <StyledRightLi>
                             <StyledOtherMsgSection>
-                                <StyledInfoBoxP>BXS in BXS/HUSD Pool:</StyledInfoBoxP>
-                                <StyledInfoBoxNum> 0.000</StyledInfoBoxNum>
+                                <StyledInfoBoxP>BXS in BXS/USDT Pool:</StyledInfoBoxP>
+                                <StyledInfoBoxNum>{(pool3)}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
-                                <StyledInfoBoxP>BXS in BXS/HBTC Pool:</StyledInfoBoxP>
-                                <StyledInfoBoxNum> 0.000</StyledInfoBoxNum>
+                                {/* <StyledInfoBoxP>BXS in BXS/HBTC Pool:</StyledInfoBoxP>
+                                <StyledInfoBoxNum> 0.000</StyledInfoBoxNum> */}
                             </StyledOtherMsgSection>
                         </StyledRightLi>
                     </StyledOtherMsg>
                     <StyledH2>Mdex Pool Metrics</StyledH2>
                     <StyledOtherMsg>
-                        <StyledLeftLi>
-                            <StyledInfoBoxH3>BXC/HUSD</StyledInfoBoxH3>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>TVL:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>$0.000</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>Yield (D/Y)*:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>NaN% /NaN%</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>Rewards Remaining:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>0.000 BXS</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                        </StyledLeftLi>
-                        <StyledRightLi>
-                            <StyledInfoBoxH3>BXC/HBTC</StyledInfoBoxH3>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>TVL:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>$0.000</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>Yield (D/Y)*:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>NaN% /NaN%</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>Rewards Remaining:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>0.000 BXS</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                        </StyledRightLi>
+                        {
+                            arr.map((v, k) => 
+                            <StyledLeftLi1 key={k}>
+                                <StyledInfoBoxH3>{v.depositTokenName}</StyledInfoBoxH3>
+                                <StyledOtherMsgSection>
+                                    <StyledInfoBoxP>TVL:</StyledInfoBoxP>
+                                    <StyledInfoBoxNum>${commify(v.tvl)}</StyledInfoBoxNum>
+                                </StyledOtherMsgSection>
+                                <StyledOtherMsgSection>
+                                    <StyledInfoBoxP>Yield (D/Y)*:</StyledInfoBoxP>
+                                    {
+                                        v.depositTokenName.toUpperCase() === 'BXC_USDT(HECO)-LP' ||  v.depositTokenName.toUpperCase() === 'BXS_USDT(HECO)-LP' ?
+                                        <StyledInfoBoxNum>{share ? (v.apy * Number(share?.priceInDAI) /365).toFixed(2) +'%/' + (v.apy * Number(share?.priceInDAI)).toFixed(2) + '%': '— %'}</StyledInfoBoxNum> :
+                                        <StyledInfoBoxNum>{cash ? (v.apy * Number(share?.priceInDAI) /365).toFixed(2) +'%/' + (v.apy * Number(cash?.priceInDAI)).toFixed(2) + '%': '— %'}</StyledInfoBoxNum>
+                                    }
+                                    {/* <StyledInfoBoxNum>{v.apy/365}% /{v.apy* Number(cash?.priceInDAI)}%</StyledInfoBoxNum> */}
+                                </StyledOtherMsgSection>
+                                <StyledOtherMsgSection>
+                                    <StyledInfoBoxP>Rewards Remaining:</StyledInfoBoxP>
+                                    <StyledInfoBoxNum>{v.remain} BXS</StyledInfoBoxNum>
+                                </StyledOtherMsgSection>
+                            </StyledLeftLi1>
+                            )
+                        }
                     </StyledOtherMsg>
-                    <StyledOtherMsg>
-                        <StyledLeftLi>
-                            <StyledInfoBoxH3>BXS/HUSD</StyledInfoBoxH3>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>TVL:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>$0.000</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>Yield (D/Y)*:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>NaN% /NaN%</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>Rewards Remaining:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>0.000 BXS</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                        </StyledLeftLi>
-                        <StyledRightLi>
-                            <StyledInfoBoxH3>BXS/HBTC</StyledInfoBoxH3>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>TVL:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>$0.000</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>Yield (D/Y)*:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>NaN% /NaN%</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                            <StyledOtherMsgSection>
-                                <StyledInfoBoxP>Rewards Remaining:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>0.000 BXS</StyledInfoBoxNum>
-                            </StyledOtherMsgSection>
-                        </StyledRightLi>
-                    </StyledOtherMsg>
-
                 </StyledInfoBox>
             </StyledInfo>
         </Page>
@@ -299,6 +301,23 @@ const StyledLeftLi = styled.li`
         width:100%
     }
 `
+
+const StyledLeftLi1 = styled.li`
+//    margin-right: 50px;
+   font-size: 16px;
+    color: #333;
+    // flex: 1 1 0%;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    width: 43%;
+    margin-bottom: 20px;
+     @media (max-width: 768px) {
+       margin-right: 0;
+       flex-direction: column;
+        width:100%
+    }
+`
 const StyledSection = styled.section`
     display: flex;
     flex-direction: column;
@@ -362,6 +381,8 @@ const StyledOtherMsg = styled.ul`
     justify-content: space-between;
     align-items: flex-end;
     flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
     @media (max-width: 768px) {
         flex-direction: column;
     }
