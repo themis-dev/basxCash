@@ -6,16 +6,23 @@ interface PageHeaderProps {
   subtitle?: string,
   title?: string,
   titleA?:string,
+  titleB?:string,
   titleHome?:string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome, titleB }) => {
   return (
     <StyledPageHeader>
         <img src={icon} alt="home icon"/>
       {/*<StyledIcon>{icon}</StyledIcon>*/}
       <StyledTitle>{title}</StyledTitle>
-      <StyledSubtitle>{subtitle}{titleA && <StyledLink2 href="https://ht.mdex.com/#/swap" target="_blank">{titleA}</StyledLink2>}</StyledSubtitle>
+      <StyledSubtitle>{subtitle}</StyledSubtitle>
+      {titleA &&
+       <div>
+         <StyledLink2 href="https://ht.mdex.com/#/swap?outputCurrency=0x15F4c382926F8A083bC924AbD3aa84Ce3982CAa9&inputCurrency=0xa71edc38d189767582c38a3145b5873052c3e47a" target="_blank">{titleA} </StyledLink2> 
+         <StyledLink2 href="https://ht.mdex.com/#/swap?outputCurrency=0xbe0e001A5553f4421DC250A20bBdAb0e735495e3&inputCurrency=0xa71edc38d189767582c38a3145b5873052c3e47a" target="_blank">{titleB} </StyledLink2> 
+       </div>
+       }
       {/* <StyledSubtitle>{subtitle}</StyledSubtitle> */}
       <StyledSubtitle>{titleHome}</StyledSubtitle>
     </StyledPageHeader>
@@ -65,7 +72,8 @@ const StyledSubtitle = styled.h3`
 const StyledLink2 = styled.a`
   color: #f4dc27;
   font-weight: 700;
-  text-decoration: none;
+  // text-decoration: none;
+  margin-left: 10px;
   &:hover {
     color: #eeb006;
   }

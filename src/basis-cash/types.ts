@@ -9,13 +9,19 @@ export interface BankInfo {
   earnTokenName: ContractName;
   sort: number;
   finished: boolean;
-  limit?:string
+  limit?:string;
 }
 
-export interface Bank extends  BankInfo {
+export interface TotalNum  {
+  tvl: number;
+  apy: number;
+};
+
+export interface Bank extends BankInfo {
   address: string;
   depositToken: ERC20;
   earnToken: ERC20;
+  totalNum?: TotalNum;
 }
 
 export type TokenStat = {
