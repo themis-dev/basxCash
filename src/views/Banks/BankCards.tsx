@@ -260,6 +260,11 @@ const StyledTitle = styled.h4`
   text-align: center;
   margin: ${(props) => props.theme.spacing[2]}px 0 0;
   padding: 0;
+  @media (min-width: 768px) {
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const StyledContent = styled.div`
