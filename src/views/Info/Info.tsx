@@ -11,7 +11,7 @@ import config from '../../config';
 const Info: React.FC = () => {
     const basisCash = useBasisCash();
     const instance = axios.create();
-  
+
     const [{ cash, bond, share }, setStats] = useState<OverviewData>({});
     const fetchStats = useCallback(async () => {
       const [cash, bond, share] = await Promise.all([
@@ -69,7 +69,7 @@ const Info: React.FC = () => {
                         <StyledTotalLeftLi>
                             <StyledSection>
                                 <StyledInfoBoxH3>Next Epoch</StyledInfoBoxH3>
-                                <StyledInfoBoxP>-</StyledInfoBoxP>
+                                <StyledInfoTotalBoxP>-</StyledInfoTotalBoxP>
                             </StyledSection>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC Spot Price</StyledInfoBoxH3>
@@ -79,7 +79,7 @@ const Info: React.FC = () => {
                         <StyledTotalRightLi>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC TWAP Price</StyledInfoBoxH3>
-                                <StyledInfoBoxP>-</StyledInfoBoxP>
+                                <StyledInfoTotalBoxP>-</StyledInfoTotalBoxP>
                             </StyledSection>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC Supply</StyledInfoBoxH3>
@@ -160,7 +160,7 @@ const Info: React.FC = () => {
                     <StyledH2>Mdex Pool Metrics</StyledH2>
                     <StyledOtherMsg>
                         {
-                            arr.map((v, k) => 
+                            arr.map((v, k) =>
                             <StyledLeftLi1 key={k}>
                                 <StyledInfoBoxH3>{v.depositTokenName}</StyledInfoBoxH3>
                                 <StyledOtherMsgSection>
@@ -234,9 +234,6 @@ const StyledInfoBox = styled.div`
     top: -80px;
     max-width: 800px;
     margin: 0 auto;
-    background: #fff;
-    box-shadow: 0 2px 20px 0 hsla(0,0%,80%,.5);
-    border-radius: 8px;
     box-sizing: border-box;
     padding: 50px 30px;
     @media (max-width: 768px) {
@@ -261,7 +258,7 @@ const StyledTotalMsg = styled.ul`
 const StyledTotalLeftLi = styled.li`
    margin-right: 50px;
    font-size: 16px;
-    color: #333;
+    color: #fff;
     flex: 1 1 0%;
     flex-direction: row;
     display: flex;
@@ -275,7 +272,7 @@ const StyledTotalLeftLi = styled.li`
 const StyledTotalRightLi = styled.li`
    margin-left: 50px;
    font-size: 16px;
-    color: #333;
+    color: #fff;
     flex: 1 1 0%;
     flex-direction: row;
     display: flex;
@@ -290,7 +287,7 @@ const StyledTotalRightLi = styled.li`
 const StyledLeftLi = styled.li`
    margin-right: 50px;
    font-size: 16px;
-    color: #333;
+    color: #bdbdbd;
     flex: 1 1 0%;
     flex-direction: column;
     display: flex;
@@ -305,7 +302,7 @@ const StyledLeftLi = styled.li`
 const StyledLeftLi1 = styled.li`
 //    margin-right: 50px;
    font-size: 16px;
-    color: #333;
+    color: #fff;
     // flex: 1 1 0%;
     flex-direction: column;
     display: flex;
@@ -329,19 +326,25 @@ const StyledSection = styled.section`
 
 const StyledInfoBoxH3 = styled.h3`
  font-size: 18px;
-    color: #7896f6;
+    color: #f4dc27;
     margin-bottom: 5px;
     margin-top:0
 `
 const StyledInfoBoxP = styled.p`
-    color: #333;
+    color: #bdbdbd;
+    margin-top: 5px;
+    font-size: 16px;
+    margin-bottom:0
+`
+const StyledInfoTotalBoxP = styled.p`
+    color: #fff;
     margin-top: 5px;
     font-size: 16px;
     margin-bottom:0
 `
 
 const StyledInfoBoxNum = styled.p`
-    color: #333;
+    color: #FFF;
     margin-top: 5px;
     font-size: 16px;
     margin-bottom:0;
@@ -352,7 +355,7 @@ const StyledInfoBoxNum = styled.p`
 `
 
 const StyledInfoBoxPRight = styled.p`
-    color: #333;
+    color: #FFF;
     margin-top: 5px;
     font-size: 16px;
     margin-bottom:0;
@@ -363,7 +366,7 @@ const StyledInfoBoxPRight = styled.p`
 const StyledRightLi = styled.li`
    margin-left: 50px;
    font-size: 16px;
-    color: #333;
+    color: #FFF;
     flex: 1 1 0%;
     flex-direction: column;
     display: flex;
@@ -397,7 +400,7 @@ const StyledOtherMsgSection = styled.section`
 
 const StyledH2 = styled.h2` 
     font-size: 22px;
-    color: #7896f6;
+    color: #f4dc27;
     margin-top: 20px;
 `
 export default Info;
