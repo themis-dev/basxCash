@@ -41,8 +41,9 @@ const Home: React.FC = () => {
       <PageHeader
         icon={welcome}
         subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on"
-        titleA=" DaoSwap."
+        titleA=" Mdex."
         title="Welcome to BasisX!"
+        titleHome='Security audit report will be online soon.'
       />
       <Spacer size="md" />
       <CardWrapper>
@@ -51,6 +52,7 @@ const Home: React.FC = () => {
           symbol="BAC"
           color="#facf09"
           supplyLabel="Circulating Supply"
+          // address=''
           address={cashAddr}
           stat={cash}
         />
@@ -59,6 +61,7 @@ const Home: React.FC = () => {
           title="BasisX Share"
           symbol="BAS"
           color="#EEA7ED"
+          // address=''
           address={shareAddr}
           stat={share}
         />
@@ -67,6 +70,7 @@ const Home: React.FC = () => {
           title="BasisX Bond"
           symbol="BAB"
           color="#ECF25C"
+          // address=''
           address={bondAddr}
           stat={bond}
         />
@@ -75,7 +79,7 @@ const Home: React.FC = () => {
             title="BasisX BTC"
             symbol="BTC"
             color="#59B9EB"
-            address=''
+            address='airdrop'
         />
       </CardWrapper>
     </Page>

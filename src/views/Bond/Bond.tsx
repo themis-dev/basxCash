@@ -19,6 +19,7 @@ import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../basis-cash/constants';
 import bank from '../../assets/img/bank.svg'
+import { useAddPopup } from '../../state/application/hooks';
 
 
 const Bond: React.FC = () => {
@@ -32,14 +33,19 @@ const Bond: React.FC = () => {
 
   // cashPrice = cashPrice.mul(decimals)
   const bondBalance = useTokenBalance(basisCash?.BAB);
-
+  const addPopup = useAddPopup();
   const handleBuyBonds = useCallback(
     async (amount: string) => {
       const tx = await basisCash.buyBonds(amount);
-      const bondAmount = Number(amount) / Number(getDisplayBalance(cashPrice));
-      addTransaction(tx, {
-        summary: `Buy ${bondAmount.toFixed(2)} BXB with ${amount} BXC`,
-      });
+      if (tx) {
+        const bondAmount = Number(amount) / Number(getDisplayBalance(cashPrice));
+        addTransaction(tx, {
+          summary: `Buy ${bondAmount.toFixed(2)} BXB with ${amount} BXC`,
+        });
+      } else {
+        const message = `error`;
+        addPopup({ error: { message, stack: '' } });
+      }
     },
     [basisCash, addTransaction, cashPrice],
   );
@@ -52,7 +58,9 @@ const Bond: React.FC = () => {
     [basisCash, addTransaction],
   );
   const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
-  const isBondPurchasable = useMemo(() => Number(bondStat?.priceInDAI) < 1.0, [bondStat]);
+  const isBondPurchasable = useMemo(() => Number(bondStat?.priceInDAI) < 0.95, [bondStat]);
+
+  console.log(isBondPurchasable)
 
   const isLaunched = Date.now() >= config.bondLaunchesAt.getTime();
   if (!isLaunched) {
@@ -95,13 +103,13 @@ const Bond: React.FC = () => {
                   toTokenName="BasisX Bond"
                   priceDesc={
                     !isBondPurchasable
-                      ? 'BXC is over $1'
+                      ? 'BXC is over $0.95'
                       : `${Math.floor(
                           100 / Number(bondStat.priceInDAI) - 100,
-                        )}% return when BXC > $1`
+                        )}% return when BXC > $0.95`
                   }
                   onExchange={handleBuyBonds}
-                  disabled={!bondStat || isBondRedeemable}
+                  disabled={!isBondPurchasable || !bondStat || isBondRedeemable}
                 />
               </StyledCardWrapper>
               <StyledStatsWrapper>

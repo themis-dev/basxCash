@@ -62,6 +62,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     />,
   );
 // && bank.depositToken.symbol !== 'HT'
+ 
   return (
     <Card>
       <CardContent>
@@ -72,6 +73,9 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
             </CardIcon>
             <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal)} />
             <Label text={`${bank.depositTokenName} Staked`} />
+            {
+              bank.limit && <Label text={`Maximum Deposit: ${bank.limit}`} />
+            }
           </StyledCardHeader>
           <StyledCardActions>
             {approveStatus !== ApprovalState.APPROVED && bank.depositToken.symbol !== 'HT' ? (

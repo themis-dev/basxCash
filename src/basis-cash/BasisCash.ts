@@ -1,4 +1,4 @@
-import { Fetcher, Route, Token } from 'daoswap-sdk';
+import { Fetcher, Route, Token } from 'medxswap-sdk';
 import { Configuration } from './config';
 import { ContractName, TokenStat, TreasuryAllocationTime } from './types';
 import { BigNumber, Contract, ethers, Overrides } from 'ethers';
@@ -49,7 +49,7 @@ export class BasisCash {
     // console.log(this.contracts)
     // Uniswap V2 Pair
     this.bacDai = new Contract(
-      externalTokens['BXC_HUSD-LP'][0],
+      externalTokens['BXC_USDT(HECO)-LP'][0],
       IUniswapV2PairABI,
       provider,
     );
@@ -120,14 +120,14 @@ export class BasisCash {
     const totalSupply = await this.BAC.displayedTotalSupply();
 
     // estimate current TWAP price
-    const cumulativePrice: BigNumber = await this.bacDai.price1CumulativeLast();
-    const cumulativePriceLast = await Oracle.price1CumulativeLast();
+    const cumulativePrice: BigNumber = await this.bacDai.price0CumulativeLast();
+    const cumulativePriceLast = await Oracle.price0CumulativeLast();
 
     // console.log(cumulativePrice)
 
     const denominator112 = BigNumber.from(2).pow(112);
     const denominator1e18 = BigNumber.from(10).pow(18);
-    const denominator1e10 = BigNumber.from(10).pow(10);
+    // const denominator1e10 = BigNumber.from(10).pow(10);
 
     if (cumulativePrice.toString() === cumulativePriceLast.toString()) {
       const oldTWAPOracle = await Oracle.price0Average();
@@ -147,8 +147,7 @@ export class BasisCash {
       .mul(denominator1e18)
       .div(elapsedSec)
       .div(denominator112)
-      .mul(denominator1e10);
-
+      // .mul(denominator1e10);
     return {
       priceInDAI: getDisplayBalance(cashPriceTWAP),
       totalSupply,
@@ -210,7 +209,12 @@ export class BasisCash {
    */
   async buyBonds(amount: string | number): Promise<TransactionResponse> {
     const { Treasury } = this.contracts;
-    return await Treasury.buyBonds(decimalToBalance(amount), await this.getBondOraclePriceInLastTWAP());
+    try {
+      return await Treasury.buyBonds(decimalToBalance(amount), await this.getBondOraclePriceInLastTWAP());
+    } catch (error) {
+      console.log(error)
+      return null
+    }
   }
 
   /**

@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { ChainId } from 'daoswap-sdk';
+import { ChainId } from 'medxswap-sdk';
 
 export interface SerializableTransactionReceipt {
   to: string;

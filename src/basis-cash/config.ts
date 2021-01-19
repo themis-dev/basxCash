@@ -1,5 +1,5 @@
 import { Deployments } from './deployments';
-import { ChainId } from 'daoswap-sdk';
+import { ChainId } from 'medxswap-sdk';
 
 export type Configuration = {
   chainId: ChainId,
@@ -10,6 +10,7 @@ export type Configuration = {
   config?: EthereumConfig,
 
   baseLaunchDate: Date,
+  bankLaunchesAt: Date,
   bondLaunchesAt: Date,
   boardroomLaunchesAt: Date,
 

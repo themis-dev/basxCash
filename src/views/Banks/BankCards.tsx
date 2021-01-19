@@ -9,6 +9,8 @@ import CardIcon from '../../components/CardIcon';
 import useBanks from '../../hooks/useBanks';
 import TokenSymbol from '../../components/TokenSymbol';
 import Notice from '../../components/Notice';
+import Countdown, { CountdownRenderProps } from 'react-countdown';
+
 
 const BankCards: React.FC = () => {
   const [banks] = useBanks();
@@ -46,7 +48,7 @@ const BankCards: React.FC = () => {
         {activeBanks.map((bank, i) => (
           <React.Fragment key={bank.name}>
             <BankCard bank={bank} />
-            {i < activeBanks.length - 1 && <StyledSpacer />}
+            {i < activeBanks.length - 1}
           </React.Fragment>
         ))}
       </StyledRow>
@@ -58,7 +60,7 @@ const BankCards: React.FC = () => {
               {bankRow.map((bank, j) => (
                 <React.Fragment key={j}>
                   <BankCard bank={bank} />
-                  {j < bankRow.length - 1 && <StyledSpacer />}
+                  {j < bankRow.length - 1}
                 </React.Fragment>
               ))}
             </StyledRow>
@@ -69,6 +71,7 @@ const BankCards: React.FC = () => {
   );
 };
 
+
 interface BankCardProps {
   bank: Bank;
 }
@@ -77,7 +80,7 @@ const BankCard: React.FC<BankCardProps> = ({ bank }) => {
   return (
     <StyledCardWrapper>
       {bank.depositTokenName.includes('LP') &&
-        (bank.depositTokenName.includes('BAS_DAI') ? (
+        (bank.depositTokenName.includes('BXC_USDT(HECO)-LP') ? (
           <StyledCardSuperAccent />
         ) : (
           <StyledCardAccent />
@@ -93,6 +96,13 @@ const BankCard: React.FC<BankCardProps> = ({ bank }) => {
               <StyledDetail>Deposit {bank.depositTokenName.toUpperCase()}</StyledDetail>
               <StyledDetail>Earn {`${bank.earnTokenName}`}</StyledDetail>
             </StyledDetails>
+            {/* <div>
+              <Styledline></Styledline>
+              <div>
+                <span>TVL</span>
+                <span>￥1234422.1</span>
+              </div>
+            </div> */}
             <Button text="Select" to={`/bank/${bank.contract}`} />
           </StyledContent>
         </CardContent>
@@ -100,6 +110,15 @@ const BankCard: React.FC<BankCardProps> = ({ bank }) => {
     </StyledCardWrapper>
   );
 };
+
+const StyledAPY = styled.div`
+
+`;
+const Styledline = styled.div`
+  background: #fff;
+  width: 100%;
+  height: 1px;
+`;
 
 const StyledCardAccent = styled.div`
   background: linear-gradient(
@@ -184,7 +203,8 @@ const StyledCardWrapper = styled.div`
   display: flex;
   width: calc((900px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
   position: relative;
-  margin-bottom: 20px
+  margin-bottom: 20px;
+  margin-left: 30px
 `;
 
 const StyledTitle = styled.h4`
