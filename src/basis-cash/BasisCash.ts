@@ -137,7 +137,7 @@ export class BasisCash {
         totalSupply,
       };
     }
-    
+
     const bacDaiReserves = await this.bacDai.getReserves();
     const blockTimestampLastUniswap = BigNumber.from(bacDaiReserves[2]);
     const elapsedSec = blockTimestampLastUniswap.sub(await Oracle.blockTimestampLast());
@@ -148,7 +148,6 @@ export class BasisCash {
       .div(elapsedSec)
       .div(denominator112)
       // .mul(denominator1e10);
-      
     return {
       priceInDAI: getDisplayBalance(cashPriceTWAP),
       totalSupply,
@@ -159,10 +158,9 @@ export class BasisCash {
     const { Treasury } = this.contracts;
     return Treasury.getSeigniorageOraclePrice();
   }
-
   async getCashPriceOne(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
-   
+
     return Treasury.cashPriceOne();
   }
 
@@ -260,7 +258,7 @@ export class BasisCash {
   async stake(poolName: ContractName, amount: BigNumber): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
     // console.log(poolName)
-    // console.log(pool) 
+    // console.log(pool)
     let value = BigNumber.from(0);
     if (poolName === 'HTCashPool') {
       value = amount
@@ -386,7 +384,7 @@ export class BasisCash {
     const { Treasury } = this.contracts;
     const nextEpochTimestamp: BigNumber = await Treasury.nextEpochPoint();
     const period: BigNumber = await Treasury.getPeriod();
-    
+
     const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
     const prevAllocation = new Date(nextAllocation.getTime() - period.toNumber() * 1000);
     return { prevAllocation, nextAllocation };
