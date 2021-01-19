@@ -53,12 +53,13 @@ const Banks: React.FC = ({ children }) => {
   useEffect(() => {
     if (basisCash) {
       fetchPools()
-      setInterval(() => {
+      const refreshInterval = setInterval(() => {
         fetchPools()
         .catch(err => console.error(`Failed to fetch pools: ${err.stack}`));
       }, 10000)
       // fetchPools()
       //   .catch(err => console.error(`Failed to fetch pools: ${err.stack}`));
+      return () => clearInterval(refreshInterval);
     }
   }, [basisCash, basisCash?.isUnlocked, fetchPools]);
 

@@ -7,10 +7,11 @@ interface PageHeaderProps {
   title?: string,
   titleA?:string,
   titleB?:string,
+  titleC?:string,
   titleHome?:string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome, titleB }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome, titleB, titleC }) => {
   return (
     <StyledPageHeader>
         <img src={icon} alt="home icon"/>
@@ -24,7 +25,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, 
        </div>
        }
       {/* <StyledSubtitle>{subtitle}</StyledSubtitle> */}
-      <StyledSubtitle>{titleHome}</StyledSubtitle>
+      <StyledSubtitle>BasisX is<StyledLink3 href='https://github.com/basisx-io/contracts/blob/main/README.md'>{titleC}</StyledLink3> Security audit report will be online soon.</StyledSubtitle>
     </StyledPageHeader>
   )
 }
@@ -79,6 +80,21 @@ const StyledLink2 = styled.a`
   }
   &.active {
     color: #eeb006;
+  }
+`
+const StyledLink3 = styled.a`
+color: #f4dc27;
+  font-weight: 700;
+  // text-decoration: none;
+  margin-left: 5px;
+  &:hover {
+    color: #eeb006;
+  }
+  &.active {
+    color: #eeb006;
+  }
+  @media (max-width: 768px) {
+    margin-left: 4px;
   }
 `
 

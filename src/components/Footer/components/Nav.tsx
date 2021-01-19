@@ -8,7 +8,7 @@ const Nav: React.FC = () => {
       <StyledLink href= {buyBAC} target="_blank">Get BXC</StyledLink>
       {/* <StyledLink >Get BXS</StyledLink> */}
       {/* <StyledLink >Get BXC</StyledLink> */}
-      {/* <StyledLink href="https://github.com/Basis-Cash" target="_blank">GitHub</StyledLink> */}
+      <StyledLink href="https://github.com/basisx-io/contracts/blob/main/README.md" target="_blank">GitHub</StyledLink>
       <StyledLink href="https://twitter.com/x_basis" target="_blank">Twitter</StyledLink>
       <StyledLink href="https://t.me/BasisxOfficial" target="_blank">Telegram</StyledLink>
       {/* <StyledLink href="https://discord.gg/UEZq3HF5Eu" target="_blank">Discord</StyledLink> */}

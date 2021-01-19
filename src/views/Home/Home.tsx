@@ -57,11 +57,12 @@ const Home: React.FC = () => {
     <Page>
       <PageHeader
         icon={welcome}
-        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on Mdex"
+        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on Mdex."
         titleA="Get BXC"
         titleB="Get BXS"
         title="Welcome to BasisX!"
-        titleHome='Security audit report will be online soon.'
+        titleC="open-source and verified."
+        titleHome='BasisX is open-source and verified. Security audit report will be online soon.'
       />
      
      {
