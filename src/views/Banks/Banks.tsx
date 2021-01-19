@@ -15,12 +15,12 @@ import LaunchCountdown from '../../components/LaunchCountdown';
 const Banks: React.FC = () => {
   const { path } = useRouteMatch();
   const { account, connect } = useWallet();
-  
+
   const [isLaunched, setIsLaunched] = useState(Date.now() >= config.bankLaunchesAt.getTime());
   setInterval(() => {
     setIsLaunched(Date.now() >= config.bankLaunchesAt.getTime())
   }, 2000)
- 
+
   if (!isLaunched) {
     return (
       <Switch>
