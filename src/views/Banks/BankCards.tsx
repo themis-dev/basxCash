@@ -96,6 +96,13 @@ const BankCard: React.FC<BankCardProps> = ({ bank }) => {
               <StyledDetail>Deposit {bank.depositTokenName.toUpperCase()}</StyledDetail>
               <StyledDetail>Earn {`${bank.earnTokenName}`}</StyledDetail>
             </StyledDetails>
+            {/* <div>
+              <Styledline></Styledline>
+              <div>
+                <span>TVL</span>
+                <span>￥1234422.1</span>
+              </div>
+            </div> */}
             <Button text="Select" to={`/bank/${bank.contract}`} />
           </StyledContent>
         </CardContent>
@@ -103,6 +110,15 @@ const BankCard: React.FC<BankCardProps> = ({ bank }) => {
     </StyledCardWrapper>
   );
 };
+
+const StyledAPY = styled.div`
+
+`;
+const Styledline = styled.div`
+  background: #fff;
+  width: 100%;
+  height: 1px;
+`;
 
 const StyledCardAccent = styled.div`
   background: linear-gradient(

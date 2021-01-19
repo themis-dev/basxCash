@@ -26,13 +26,15 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const { onReward } = useHarvest(bank);
 
   const tokenName = bank.earnTokenName === 'BXS' ? 'Share' : 'Cash';
+  // console.log(bank)
+  // console.log(bank.earnToken)
   return (
     <Card>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon>
-              <TokenSymbol symbol={bank.earnToken.symbol} />
+              <TokenSymbol symbol={bank.earnTokenName} />
             </CardIcon>
             <Value value={getDisplayBalance(earnings)} />
             <Label text={`BasisX ${tokenName} Earned`} />
