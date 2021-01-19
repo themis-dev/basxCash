@@ -4,16 +4,23 @@ import Page from '../../components/Page';
 import PageHeader from '../../components/PageHeader';
 import Spacer from '../../components/Spacer';
 import HomeCard from './components/HomeCard';
-import { OverviewData } from './types';
+import { OverviewData, tvlData } from './types';
 import useBasisCash from '../../hooks/useBasisCash';
 import config from '../../config';
 import Notice from '../../components/Notice';
 import welcome from '../../assets/img/welcome.png'
+import axios from 'ts-axios-new'
+import { apiUrl } from '../../basis-cash/config';
+import { commify } from 'ethers/lib/utils';
 
 const Home: React.FC = () => {
   const basisCash = useBasisCash();
 
+  const instance = axios.create();
+  // 
+
   const [{ cash, bond, share }, setStats] = useState<OverviewData>({});
+  const [{totaltvl}, setTotaltvl] = useState<tvlData>({});
   const fetchStats = useCallback(async () => {
     const [cash, bond, share] = await Promise.all([
       basisCash.getCashStatFromUniswap(),
@@ -26,9 +33,19 @@ const Home: React.FC = () => {
     setStats({ cash, bond, share });
   }, [basisCash, setStats]);
 
+  const fetchTotaltvl = useCallback(async () => {
+    const data = await instance.get(apiUrl + '/totaltvl')
+    const totaltvl = data.data.data
+    setTotaltvl({ totaltvl });
+  }, [, setStats])
+
   useEffect(() => {
     if (basisCash) {
       fetchStats().catch((err) => console.error(err.stack));
+      fetchTotaltvl()
+      setInterval(() => {
+        fetchTotaltvl()
+      },5000)
     }
   }, [basisCash]);
 
@@ -40,11 +57,16 @@ const Home: React.FC = () => {
     <Page>
       <PageHeader
         icon={welcome}
-        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on"
-        titleA=" Mdex."
+        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on Mdex"
+        titleA="Get BXC"
+        titleB="Get BXS"
         title="Welcome to BasisX!"
         titleHome='Security audit report will be online soon.'
       />
+     
+     {
+       totaltvl && <StyledTotalStake>BasisX Currently Has <StyledTotalStakeNum>${commify(totaltvl)}</StyledTotalStakeNum> Of Total Value Locked.</StyledTotalStake>
+     }
       <Spacer size="md" />
       <CardWrapper>
         <HomeCard
@@ -85,6 +107,19 @@ const Home: React.FC = () => {
     </Page>
   );
 };
+
+const StyledTotalStake = styled.div`
+  color: #fff;
+  font-size: 28px;
+  font-weight: 500;
+  text-align: center;
+`;
+const StyledTotalStakeNum = styled.span`
+  color: #f4dc27;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+`;
 
 const StyledOverview = styled.div`
   align-items: center;

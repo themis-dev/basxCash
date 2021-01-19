@@ -5,3 +5,8 @@ export interface OverviewData {
   bond?: TokenStat;
   share?: TokenStat;
 }
+
+
+export interface tvlData {
+  totaltvl?: any;
+}

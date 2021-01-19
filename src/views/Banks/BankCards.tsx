@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { useCallback, useEffect, useState } from 'react';
 import { Bank } from '../../basis-cash';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
@@ -10,10 +10,28 @@ import useBanks from '../../hooks/useBanks';
 import TokenSymbol from '../../components/TokenSymbol';
 import Notice from '../../components/Notice';
 import Countdown, { CountdownRenderProps } from 'react-countdown';
-
+import useBasisCash from '../../hooks/useBasisCash';
+import { OverviewData } from '../Home/types';
+import { commify } from 'ethers/lib/utils';
 
 const BankCards: React.FC = () => {
   const [banks] = useBanks();
+
+  const basisCash = useBasisCash();
+  const [{ cash, share }, setStats] = useState<OverviewData>({});
+  const fetchStats = useCallback(async () => {
+    const [cash, share] = await Promise.all([
+      basisCash.getCashStatFromUniswap(),
+      basisCash.getShareStat(),
+    ]);
+    setStats({ cash, share });
+  }, [basisCash, setStats]);
+
+  useEffect(() => {
+    if (basisCash) {
+      fetchStats().catch((err) => console.error(err.stack));
+    }
+  }, [basisCash]);
 
   const activeBanks = banks.filter((bank) => !bank.finished);
   const inactiveBanks = banks.filter((bank) => bank.finished);
@@ -47,7 +65,7 @@ const BankCards: React.FC = () => {
       <StyledRow>
         {activeBanks.map((bank, i) => (
           <React.Fragment key={bank.name}>
-            <BankCard bank={bank} />
+            <BankCard bank={bank} cash={cash} share={share}/>
             {i < activeBanks.length - 1}
           </React.Fragment>
         ))}
@@ -74,9 +92,11 @@ const BankCards: React.FC = () => {
 
 interface BankCardProps {
   bank: Bank;
+  cash?: any,
+  share?: any,
 }
 
-const BankCard: React.FC<BankCardProps> = ({ bank }) => {
+const BankCard: React.FC<BankCardProps> = ({ bank, cash, share }) => {
   return (
     <StyledCardWrapper>
       {bank.depositTokenName.includes('LP') &&
@@ -96,13 +116,23 @@ const BankCard: React.FC<BankCardProps> = ({ bank }) => {
               <StyledDetail>Deposit {bank.depositTokenName.toUpperCase()}</StyledDetail>
               <StyledDetail>Earn {`${bank.earnTokenName}`}</StyledDetail>
             </StyledDetails>
-            {/* <div>
+            <StyledTotal>
               <Styledline></Styledline>
-              <div>
-                <span>TVL</span>
-                <span>￥1234422.1</span>
-              </div>
-            </div> */}
+              <StyledTotalContent>
+                <StyledTotalItem>
+                  <StyledAPY>TVL</StyledAPY>
+                  <StyledAPY>${commify(bank.totalNum?.tvl)}</StyledAPY>
+                </StyledTotalItem>
+                <StyledTotalItem>
+                  <StyledAPY>APY</StyledAPY>
+                  {
+                    bank.depositTokenName.toUpperCase() === 'BXC_USDT(HECO)-LP' ||  bank.depositTokenName.toUpperCase() === 'BXS_USDT(HECO)-LP' ?
+                    <StyledAPY>{share ? (bank.totalNum?.apy * share?.priceInDAI).toFixed(2) + '%': '— %'}</StyledAPY> :
+                    <StyledAPY>{cash ? (bank.totalNum?.apy * cash?.priceInDAI).toFixed(2) + '%': '— %'}</StyledAPY>
+                  }
+                </StyledTotalItem>
+              </StyledTotalContent>
+            </StyledTotal>
             <Button text="Select" to={`/bank/${bank.contract}`} />
           </StyledContent>
         </CardContent>
@@ -111,8 +141,24 @@ const BankCard: React.FC<BankCardProps> = ({ bank }) => {
   );
 };
 
-const StyledAPY = styled.div`
+const StyledTotal = styled.div`
+  margin-bottom: ${(props) => props.theme.spacing[5]}px;
+  width: 88%;
+`;
 
+const StyledTotalContent = styled.div`
+
+`;
+
+const StyledTotalItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledAPY = styled.div`
+  color: #fff;
+  font-size: 14px;
+  margin-top: 10px
 `;
 const Styledline = styled.div`
   background: #fff;
@@ -214,6 +260,11 @@ const StyledTitle = styled.h4`
   text-align: center;
   margin: ${(props) => props.theme.spacing[2]}px 0 0;
   padding: 0;
+  @media (min-width: 768px) {
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const StyledContent = styled.div`
@@ -228,7 +279,7 @@ const StyledSpacer = styled.div`
 `;
 
 const StyledDetails = styled.div`
-  margin-bottom: ${(props) => props.theme.spacing[6]}px;
+  margin-bottom: ${(props) => props.theme.spacing[4]}px;
   margin-top: ${(props) => props.theme.spacing[2]}px;
   text-align: center;
 `;

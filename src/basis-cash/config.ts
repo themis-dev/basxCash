@@ -35,3 +35,5 @@ export const defaultEthereumConfig = {
   defaultGasPrice: "1000000000000",
   ethereumNodeTimeout: 10000,
 };
+
+export const apiUrl = 'https://api.basisx.io'
