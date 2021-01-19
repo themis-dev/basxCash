@@ -12,17 +12,13 @@ const Info: React.FC = () => {
     const basisCash = useBasisCash();
     const instance = axios.create();
   
-    const [{ cash, bond, share }, setStats] = useState<OverviewData>({});
+    const [{ cash, share }, setStats] = useState<OverviewData>({});
     const fetchStats = useCallback(async () => {
-      const [cash, bond, share] = await Promise.all([
+      const [cash, share] = await Promise.all([
         basisCash.getCashStatFromUniswap(),
-        basisCash.getBondStat(),
         basisCash.getShareStat(),
       ]);
-      if (Date.now() < config.bondLaunchesAt.getTime()) {
-        bond.priceInDAI = '-';
-      }
-      setStats({ cash, bond, share });
+      setStats({ cash, share });
     }, [basisCash, setStats]);
 
     const [{ pool2, pool3 }, setPool] = useState<LpPoolData>({});
@@ -37,10 +33,6 @@ const Info: React.FC = () => {
     const fetchApyTvl = useCallback(async() => {
         const data = await instance.get(apiUrl + '/getInfo')
         const arr = data.data.data
-        // arr.map((v: { apy: any; }) => {
-        //     v.apy = v.apy
-        // })
-        console.log(arr)
         setApyTvl(arr)
     }, [setPool])
 
@@ -49,6 +41,12 @@ const Info: React.FC = () => {
           fetchStats().catch((err) => console.error(err.stack));
           fetchLPPool()
           fetchApyTvl()
+          const refreshInterval = setInterval(() => {
+            fetchStats().catch((err) => console.error(err.stack));
+            fetchLPPool()
+            fetchApyTvl()
+          }, 10000)
+          return () => clearInterval(refreshInterval);
         }
       }, [basisCash]);
 
