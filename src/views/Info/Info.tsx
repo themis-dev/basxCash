@@ -5,6 +5,7 @@ import Page from '../../components/Page';
 const Info: React.FC = () => {
     // const basisCash = useBasisCash();
 
+
     useEffect(() => {
         // if (basisCash) {
         //
@@ -18,7 +19,7 @@ const Info: React.FC = () => {
                     <StyledFlexBanner>
                         <StyledDiv>
                             <StyledSubtitle>Next Epoch:</StyledSubtitle>
-                            <StyledMinTitle>There is expected to be no supply increase based onthe current BXC TWAP of $0.000 .</StyledMinTitle>
+                            <StyledMinTitle>There is expected to be no supply increase based on the current BXC TWAP of $0.000 .</StyledMinTitle>
                             {/*<StyledMinTitle style="display: none;">The supply will be increased 0.000 based on the current BXC TWAP of $0.000 .Returning NaN BXC per BXS</StyledMinTitle>*/}
                         </StyledDiv>
                     </StyledFlexBanner>
@@ -28,7 +29,7 @@ const Info: React.FC = () => {
                         <StyledTotalLeftLi>
                             <StyledSection>
                                 <StyledInfoBoxH3>Next Epoch</StyledInfoBoxH3>
-                                <StyledInfoBoxP>18:47:30</StyledInfoBoxP>
+                                <StyledInfoTotalBoxP>18:47:30</StyledInfoTotalBoxP>
                             </StyledSection>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC Spot Price</StyledInfoBoxH3>
@@ -38,7 +39,7 @@ const Info: React.FC = () => {
                         <StyledTotalRightLi>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC TWAP Price</StyledInfoBoxH3>
-                                <StyledInfoBoxP>$0.000</StyledInfoBoxP>
+                                <StyledInfoTotalBoxP>$0.000</StyledInfoTotalBoxP>
                             </StyledSection>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC Supply</StyledInfoBoxH3>
@@ -181,7 +182,6 @@ const Info: React.FC = () => {
                             </StyledOtherMsgSection>
                         </StyledRightLi>
                     </StyledOtherMsg>
-
                 </StyledInfoBox>
             </StyledInfo>
         </Page>
@@ -232,9 +232,6 @@ const StyledInfoBox = styled.div`
     top: -80px;
     max-width: 800px;
     margin: 0 auto;
-    background: #fff;
-    box-shadow: 0 2px 20px 0 hsla(0,0%,80%,.5);
-    border-radius: 8px;
     box-sizing: border-box;
     padding: 50px 30px;
     @media (max-width: 768px) {
@@ -259,7 +256,7 @@ const StyledTotalMsg = styled.ul`
 const StyledTotalLeftLi = styled.li`
    margin-right: 50px;
    font-size: 16px;
-    color: #333;
+    color: #FFF;
     flex: 1 1 0%;
     flex-direction: row;
     display: flex;
@@ -273,7 +270,7 @@ const StyledTotalLeftLi = styled.li`
 const StyledTotalRightLi = styled.li`
    margin-left: 50px;
    font-size: 16px;
-    color: #333;
+    color: #FFF;
     flex: 1 1 0%;
     flex-direction: row;
     display: flex;
@@ -288,7 +285,7 @@ const StyledTotalRightLi = styled.li`
 const StyledLeftLi = styled.li`
    margin-right: 50px;
    font-size: 16px;
-    color: #333;
+    color: #bdbdbd;
     flex: 1 1 0%;
     flex-direction: column;
     display: flex;
@@ -310,19 +307,25 @@ const StyledSection = styled.section`
 
 const StyledInfoBoxH3 = styled.h3`
  font-size: 18px;
-    color: #7896f6;
+    color: #f4dc27;
     margin-bottom: 5px;
     margin-top:0
 `
 const StyledInfoBoxP = styled.p`
-    color: #333;
+    color: #bdbdbd;
+    margin-top: 5px;
+    font-size: 16px;
+    margin-bottom:0
+`
+const StyledInfoTotalBoxP = styled.p`
+    color: #fff;
     margin-top: 5px;
     font-size: 16px;
     margin-bottom:0
 `
 
 const StyledInfoBoxNum = styled.p`
-    color: #333;
+    color: #FFF;
     margin-top: 5px;
     font-size: 16px;
     margin-bottom:0;
@@ -333,7 +336,7 @@ const StyledInfoBoxNum = styled.p`
 `
 
 const StyledInfoBoxPRight = styled.p`
-    color: #333;
+    color: #FFF;
     margin-top: 5px;
     font-size: 16px;
     margin-bottom:0;
@@ -344,7 +347,7 @@ const StyledInfoBoxPRight = styled.p`
 const StyledRightLi = styled.li`
    margin-left: 50px;
    font-size: 16px;
-    color: #333;
+    color: #FFF;
     flex: 1 1 0%;
     flex-direction: column;
     display: flex;
@@ -376,7 +379,7 @@ const StyledOtherMsgSection = styled.section`
 
 const StyledH2 = styled.h2` 
     font-size: 22px;
-    color: #7896f6;
+    color: #f4dc27;
     margin-top: 20px;
 `
 export default Info;

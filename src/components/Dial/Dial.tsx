@@ -10,7 +10,7 @@ interface DialProps {
   value: number
 }
 
-const Dial: React.FC<DialProps> = ({ children, disabled, size = 256, value }) => {
+const Dial: React.FC<DialProps> = ({ children, disabled, size = 236, value }) => {
   const { color } = useContext(ThemeContext)
 
   return (

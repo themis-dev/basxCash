@@ -7,7 +7,7 @@ import HPTLogo from '../../assets/img/HPT.png';
 import HTLogo from '../../assets/img/HT.png';
 import sUSDLogo from '../../assets/img/sUSD.png';
 import HBTCLogo from '../../assets/img/btc.png';
-import USDTLogo from '../../assets/img/usdt.png';
+import USDTLogo from '../../assets/img/USDT.png';
 import DOTLogo from '../../assets/img/HDOT.png';
 import ETHLogo from '../../assets/img/HETH.png';
 import BTCLogo from '../../assets/img/btc1.png';
