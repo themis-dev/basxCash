@@ -57,12 +57,13 @@ const Home: React.FC = () => {
     <Page>
       <PageHeader
         icon={welcome}
-        subtitle="Buy, sell, and provide liquidity for BasisX Cash and BasisX Shares on Mdex."
+        subtitle="Controlled Inflationary Algo Stablecoin"
+        subtitle1="Max Inflation of 4% per Epoch, Faster Epoch Time of 6 Hours!"
         titleA="Get BXC"
         titleB="Get BXS"
         title="Welcome to BasisX!"
-        titleC="open-source and verified."
-        titleHome='BasisX is open-source and verified. Security audit report will be online soon.'
+        titleC="open-source."
+        titleHome='BasisX is open-source. Stay tuned for security audit.'
       />
      
      {

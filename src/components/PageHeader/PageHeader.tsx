@@ -4,6 +4,7 @@ import styled from 'styled-components'
 interface PageHeaderProps {
   icon?: string,
   subtitle?: string,
+  subtitle1?: string,
   title?: string,
   titleA?:string,
   titleB?:string,
@@ -11,13 +12,14 @@ interface PageHeaderProps {
   titleHome?:string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome, titleB, titleC }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome, titleB, titleC, subtitle1 }) => {
   return (
     <StyledPageHeader>
         <img src={icon} alt="home icon"/>
       {/*<StyledIcon>{icon}</StyledIcon>*/}
       <StyledTitle>{title}</StyledTitle>
       <StyledSubtitle>{subtitle}</StyledSubtitle>
+      <StyledSubtitle>{subtitle1}</StyledSubtitle>
       {titleA &&
        <div>
          <StyledLink2 href="https://ht.mdex.com/#/swap?outputCurrency=0x15F4c382926F8A083bC924AbD3aa84Ce3982CAa9&inputCurrency=0xa71edc38d189767582c38a3145b5873052c3e47a" target="_blank">{titleA} </StyledLink2> 
@@ -25,7 +27,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, 
        </div>
        }
       {/* <StyledSubtitle>{subtitle}</StyledSubtitle> */}
-      <StyledSubtitle>BasisX is<StyledLink3 href='https://github.com/basisx-io/contracts/blob/main/README.md'>{titleC}</StyledLink3> Security audit report will be online soon.</StyledSubtitle>
+      <StyledSubtitle>BasisX is<StyledLink3 href='https://github.com/basisx-io/contracts/blob/main/README.md'>{titleC}</StyledLink3> Stay tuned for security audit.</StyledSubtitle>
     </StyledPageHeader>
   )
 }
