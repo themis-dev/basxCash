@@ -30,17 +30,17 @@ const HomeCard: React.FC<HomeCardProps> = ({
       <CardHeader>{title}</CardHeader>
        <StyledCards>
          {
-           address === 'airdrop' ? 
-           <StyledAirdropSoon> 
+           address === 'airdrop' ?
+           <StyledAirdropSoon>
              <div>Airdrop</div>
              Coming soon
-            </StyledAirdropSoon> : 
+            </StyledAirdropSoon> :
              !address ?
-            <StyledSoon> 
+            <StyledSoon>
               Coming soon
             </StyledSoon> : null
          }
-         
+
            <StyledBlur color={address}>
              <TokenSymbol symbol={symbol} />
              <CardSection>
@@ -104,7 +104,7 @@ const StyledCards = styled.div`
   min-width: 250px;
   padding: ${(props) => props.theme.spacing[3]}px;
   color: ${(props) => props.theme.color.white};
-  background-color: ${(props) => props.theme.color.grey[900]};
+  background-color: #251d06;
   border-radius: 5px;
   @media (max-width: 768px) {
     width: 0;

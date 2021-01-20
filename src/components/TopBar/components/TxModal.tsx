@@ -55,7 +55,7 @@ const TxModal: React.FC<ModalProps> = ({ onDismiss }) => {
         </>
       )}
       {isEmpty && (
-        <Label text="No transactions." color="#777" />
+        <Label text="No transactions." color="#bdbdbd" />
       )}
       <ModalActions>
         <Button text="Close" onClick={onDismiss} />

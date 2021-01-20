@@ -48,7 +48,7 @@ const Boardroom: React.FC = () => {
         : prevAllocation,
     [prevAllocation, nextAllocation],
   );
-  
+
   const nextEpoch = useMemo(() => moment(prevEpoch).add(6, 'hours').toDate(), [prevEpoch]);
 
   const boardroomVersion = useBoardroomVersion();
