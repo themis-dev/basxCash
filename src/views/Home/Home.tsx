@@ -63,7 +63,7 @@ const Home: React.FC = () => {
         titleB="Get BXS"
         title="Welcome to BasisX!"
         titleC="open-source"
-        titleHome='audited.'
+        titleHome='audited'
       />
      
      {

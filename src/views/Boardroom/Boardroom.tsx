@@ -48,7 +48,7 @@ const Boardroom: React.FC = () => {
         : prevAllocation,
     [prevAllocation, nextAllocation],
   );
-  
+
   const nextEpoch = useMemo(() => moment(prevEpoch).add(6, 'hours').toDate(), [prevEpoch]);
 
   const boardroomVersion = useBoardroomVersion();
@@ -78,7 +78,8 @@ const Boardroom: React.FC = () => {
           <PageHeader
             icon={join}
             title="Join the Boardroom"
-            subtitle="Deposit BasisX Shares and earn inflationary rewards"
+            subtitle="Stake BXS for X-Men Inflationary Rewards"
+            subtitle1="Max Inflation 4% per Epoch"
           />
           <LaunchCountdown
             deadline={config.boardroomLaunchesAt}
@@ -98,7 +99,8 @@ const Boardroom: React.FC = () => {
             <PageHeader
               icon={join}
               title="Join the Boardroom"
-              subtitle="Deposit BasisX Shares and earn inflationary rewards"
+              subtitle="Stake BXS for X-Men Inflationary Rewards"
+              subtitle1="Max Inflation 4% per Epoch"
             />
             {migrateNotice}
             <StyledHeader>

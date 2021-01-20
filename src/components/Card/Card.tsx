@@ -8,10 +8,10 @@ const Card: React.FC = ({ children }) => (
 )
 
 const StyledCard = styled.div`
-  background-color: ${props => props.theme.color.grey[800]};
-  border: 1px solid ${props => props.theme.color.grey[900]};
+  background-color: #251d06;
+  border: 1px solid #251d06;
   border-radius: 12px;
-  box-shadow: inset 1px 1px 0px ${props => props.theme.color.grey[700]};
+  box-shadow: inset 1px 1px 0px #251d06;
   display: flex;
   flex: 1;
   flex-direction: column;

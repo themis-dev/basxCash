@@ -15,7 +15,11 @@ interface PageHeaderProps {
 const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome, titleB, titleC, subtitle1 }) => {
   return (
     <StyledPageHeader>
-        <img src={icon} alt="home icon"/>
+      {
+        titleHome ?
+        <img src={icon} alt="home icon" style={{width: '192px',height: '154px'}} /> :
+        <img src={icon} alt="home icon" style={{width: '192px',height: '192px'}} />
+      }
       {/*<StyledIcon>{icon}</StyledIcon>*/}
       <StyledTitle>{title}</StyledTitle>
       <StyledSubtitle>{subtitle}</StyledSubtitle>
@@ -32,6 +36,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, 
         <StyledSubtitle>BasisX is<StyledLink3 href='https://github.com/basisx-io/contracts/blob/main/README.md'>{titleC}</StyledLink3> 
           and
         <StyledLink3 href='https://github.com/basisx-io/contracts/blob/main/REP-BasisX-16_01_2021.pdf'>{titleHome}</StyledLink3>
+        on HECO.
         </StyledSubtitle>
       }
     </StyledPageHeader>

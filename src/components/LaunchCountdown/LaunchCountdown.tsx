@@ -52,7 +52,7 @@ const LaunchCountdown: React.FC<LaunchCountdownProps> = ({
 const StyledCard = styled.div`
   max-width: 400px;
   background-color: #271c20;
-  border: 1px solid ${(props) => props.theme.color.grey[900]};
+  border: 1px solid #251d06;
   box-sizing: border-box;
   padding: 36px;
   border-radius: 48px;

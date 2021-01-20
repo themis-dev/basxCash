@@ -26,7 +26,7 @@ const Modal: React.FC = ({ children }) => {
 
 const StyledModal = styled.div`
   border-radius: 12px;
-  box-shadow: 24px 24px 48px -24px ${(props) => props.theme.color.grey[900]};
+  box-shadow: 24px 24px 48px -24px #251d06;
   position: relative;
 `;
 const StyledModalSM = styled.div`

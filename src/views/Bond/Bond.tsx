@@ -18,7 +18,7 @@ import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../basis-cash/constants';
-import bank from '../../assets/img/bank.svg'
+import bank from '../../assets/img/bank.png'
 import { useAddPopup } from '../../state/application/hooks';
 
 

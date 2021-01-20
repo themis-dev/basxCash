@@ -35,8 +35,8 @@ const StyledLink = styled.a`
   display:inline-block;
   margin-bottom:10px;
   @media (max-width: 768px) {
-    padding-left: ${props => props.theme.spacing[1]}px;
-    padding-right: ${props => props.theme.spacing[1]}px;
+    padding-left: ${props => props.theme.spacing[2]}px;
+    padding-right: ${props => props.theme.spacing[2]}px;
     font-size: 10px
   }
 `

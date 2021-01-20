@@ -8,7 +8,7 @@ import BankCards from './BankCards';
 import { useWallet } from 'use-wallet';
 import Button from '../../components/Button';
 import styled from 'styled-components';
-import bank from '../../assets/img/bank.svg'
+import bank from '../../assets/img/bank.png'
 import config from '../../config';
 import LaunchCountdown from '../../components/LaunchCountdown';
 
@@ -27,8 +27,8 @@ const Banks: React.FC = () => {
         <Page>
           <PageHeader
             icon={bank}
-            title="Pick a Bank."
-            subtitle="Earn BasisX Shares by providing liquidity"
+            title="Pick Your Superpower"
+            subtitle="Earn BXS with Super Liquidity Provision"
           />
           <LaunchCountdown
             deadline={config.bankLaunchesAt}
@@ -45,8 +45,8 @@ const Banks: React.FC = () => {
         <Route exact path={path}>
           <PageHeader
             icon={bank}
-            title="Pick a Bank."
-            subtitle="Earn BasisX Shares by providing liquidity"
+            title="Pick Your Superpower"
+            subtitle="Earn BXS with Super Liquidity Provision"
           />
           {!!account ? (
             <BankCards />
