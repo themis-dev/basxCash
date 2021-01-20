@@ -27,7 +27,13 @@ const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, 
        </div>
        }
       {/* <StyledSubtitle>{subtitle}</StyledSubtitle> */}
-      <StyledSubtitle>BasisX is<StyledLink3 href='https://github.com/basisx-io/contracts/blob/main/README.md'>{titleC}</StyledLink3> Stay tuned for security audit.</StyledSubtitle>
+      {
+        titleHome &&
+        <StyledSubtitle>BasisX is<StyledLink3 href='https://github.com/basisx-io/contracts/blob/main/README.md'>{titleC}</StyledLink3> 
+          and
+        <StyledLink3 href='https://github.com/basisx-io/contracts/blob/main/REP-BasisX-16_01_2021.pdf'>{titleHome}</StyledLink3>
+        </StyledSubtitle>
+      }
     </StyledPageHeader>
   )
 }
@@ -89,6 +95,7 @@ color: #f4dc27;
   font-weight: 700;
   // text-decoration: none;
   margin-left: 5px;
+  margin-right: 5px;
   &:hover {
     color: #eeb006;
   }
@@ -97,6 +104,7 @@ color: #f4dc27;
   }
   @media (max-width: 768px) {
     margin-left: 4px;
+    margin-right: 4px;
   }
 `
 

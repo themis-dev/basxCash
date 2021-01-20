@@ -13,7 +13,7 @@ const Nav: React.FC = () => {
       <StyledLink href="https://t.me/BasisxOfficial" target="_blank">Telegram</StyledLink>
       {/* <StyledLink href="https://discord.gg/UEZq3HF5Eu" target="_blank">Discord</StyledLink> */}
       <StyledLink href="https://basisx.medium.com/" target="_blank">Medium</StyledLink>
-      {/* <StyledLink href="https://www.dropbox.com/s/ed5vxvaple5e740/REP-Basis-Cash-06_11_2020.pdf?dl=0" target="_blank">Audit</StyledLink> */}
+      <StyledLink href="https://github.com/basisx-io/contracts/blob/main/REP-BasisX-16_01_2021.pdf" target="_blank">Audit</StyledLink>
     </StyledNav>
   )
 }
@@ -35,9 +35,9 @@ const StyledLink = styled.a`
   display:inline-block;
   margin-bottom:10px;
   @media (max-width: 768px) {
-    padding-left: ${props => props.theme.spacing[2]}px;
-    padding-right: ${props => props.theme.spacing[2]}px;
-    font-size: 12px
+    padding-left: ${props => props.theme.spacing[1]}px;
+    padding-right: ${props => props.theme.spacing[1]}px;
+    font-size: 10px
   }
 `
 const buyBAS ="https://ht.mdex.com/#/swap?outputCurrency=0xbe0e001A5553f4421DC250A20bBdAb0e735495e3&inputCurrency=0xa71edc38d189767582c38a3145b5873052c3e47a";
