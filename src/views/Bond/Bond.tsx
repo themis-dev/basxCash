@@ -18,7 +18,7 @@ import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../basis-cash/constants';
-import bank from '../../assets/img/bank.png'
+import bonds from '../../assets/img/bonds.png'
 import { useAddPopup } from '../../state/application/hooks';
 
 
@@ -68,9 +68,9 @@ const Bond: React.FC = () => {
       <Switch>
         <Page>
           <PageHeader
-            icon={bank}
+            icon={bonds}
             title="Buy & Redeem Bonds"
-            subtitle="Earn premiums upon redemption"
+            subtitle="Purchase Mutant Bonds for Premium upon Redemption"
           />
           <LaunchCountdown
             deadline={config.bondLaunchesAt}
@@ -88,9 +88,9 @@ const Bond: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={bank}
+                icon={bonds}
                 title="Buy & Redeem Bonds"
-                subtitle="Earn premiums upon redemption"
+                subtitle="Purchase Mutant Bonds for Premium upon Redemption"
               />
             </Route>
             <StyledBond>

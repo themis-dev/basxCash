@@ -77,9 +77,10 @@ const Boardroom: React.FC = () => {
         <Page>
           <PageHeader
             icon={join}
-            title="Join the Boardroom"
+            title="Join X-Men Boardroom"
             subtitle="Stake BXS for X-Men Inflationary Rewards"
             subtitle1="Max Inflation 4% per Epoch"
+            boardoom={true}
           />
           <LaunchCountdown
             deadline={config.boardroomLaunchesAt}
@@ -98,7 +99,7 @@ const Boardroom: React.FC = () => {
           <>
             <PageHeader
               icon={join}
-              title="Join the Boardroom"
+              title="Join X-Men Boardroom"
               subtitle="Stake BXS for X-Men Inflationary Rewards"
               subtitle1="Max Inflation 4% per Epoch"
             />

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Boardroom from '../../assets/img/Boardroom.png'
 
 interface PageHeaderProps {
   icon?: string,
@@ -9,16 +10,20 @@ interface PageHeaderProps {
   titleA?:string,
   titleB?:string,
   titleC?:string,
-  titleHome?:string
+  titleHome?:string,
+  boardoom?:boolean,
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome, titleB, titleC, subtitle1 }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, titleA, titleHome, titleB, titleC, subtitle1, boardoom }) => {
   return (
     <StyledPageHeader>
       {
         titleHome ?
-        <img src={icon} alt="home icon" style={{width: '192px',height: '154px'}} /> :
-        <img src={icon} alt="home icon" style={{width: '192px',height: '192px'}} />
+        <img src={icon} alt="home icon" style={{width: '151px',height: '100px'}} /> :
+        boardoom ?
+        <StyledBroardImg src={Boardroom} alt="home icon" />
+         :
+        <img src={icon} alt="home icon" style={{width: '100px',height: '100px'}} />
       }
       {/*<StyledIcon>{icon}</StyledIcon>*/}
       <StyledTitle>{title}</StyledTitle>
@@ -56,6 +61,27 @@ const StyledPageHeader = styled.div`
   @media (max-width: 768px) {
     padding-bottom: 60px;
     padding-top: 60px
+  }
+`
+
+const StyledBroard = styled.div`
+  display: flex;
+  width: 84%;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+  margin-top: -10px;
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    justify-content: space-around;
+  }
+`
+
+const StyledBroardImg = styled.img`
+  width: 400px;
+  height: 100px;
+  @media (max-width: 768px) {
+    width: 300px;
+    height: 75px;
   }
 `
 

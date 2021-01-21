@@ -12,7 +12,7 @@ import Stake from './components/Stake';
 import useBank from '../../hooks/useBank';
 import useRedeem from '../../hooks/useRedeem';
 import { Bank as BankEntity } from '../../basis-cash';
-import bankIcon from '../../assets/img/bank.svg'
+import bankIcon from '../../assets/img/bank.png'
 
 
 const Bank: React.FC = () => {

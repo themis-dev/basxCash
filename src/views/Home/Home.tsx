@@ -61,7 +61,7 @@ const Home: React.FC = () => {
         subtitle1="Max Inflation of 4% per Epoch, Faster Epoch Time of 6 Hours!"
         titleA="Get BXC"
         titleB="Get BXS"
-        title="Welcome to BasisX!"
+        title="BasisX for All Mutants!"
         titleC="open-source"
         titleHome='audited'
       />
