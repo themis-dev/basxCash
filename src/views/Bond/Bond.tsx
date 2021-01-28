@@ -29,9 +29,7 @@ const Bond: React.FC = () => {
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
   let cashPrice = useBondOraclePriceInLastTWAP();
-  // const decimals = BigNumber.from(10).pow(8);
-
-  // cashPrice = cashPrice.mul(decimals)
+  
   const bondBalance = useTokenBalance(basisCash?.BAB);
   const addPopup = useAddPopup();
   const handleBuyBonds = useCallback(
@@ -60,7 +58,7 @@ const Bond: React.FC = () => {
   const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
   const isBondPurchasable = useMemo(() => Number(bondStat?.priceInDAI) < 0.95, [bondStat]);
 
-  console.log(isBondPurchasable)
+  // console.log(isBondPurchasable)
 
   const isLaunched = Date.now() >= config.bondLaunchesAt.getTime();
   if (!isLaunched) {

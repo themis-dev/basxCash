@@ -42,10 +42,10 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (basisCash) {
       fetchStats().catch((err) => console.error(err.stack));
-      fetchTotaltvl()
-      setInterval(() => {
-        fetchTotaltvl()
-      },5000)
+      // fetchTotaltvl()
+      // setInterval(() => {
+      //   fetchTotaltvl()
+      // },5000)
     }
   }, [basisCash]);
 
@@ -65,10 +65,10 @@ const Home: React.FC = () => {
         titleC="open-source"
         titleHome='audited'
       />
-     
-     {
+     <StyledTotalStake>Prof. X story begins now! TVL is not important, Memes are! </StyledTotalStake>
+     {/* {
        totaltvl && <StyledTotalStake>BasisX Currently Has <StyledTotalStakeNum>${commify(totaltvl)}</StyledTotalStakeNum> Of Total Value Locked.</StyledTotalStake>
-     }
+     } */}
       <Spacer size="md" />
       <CardWrapper>
         <HomeCard

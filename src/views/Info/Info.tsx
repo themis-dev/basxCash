@@ -7,26 +7,53 @@ import { commify } from 'ethers/lib/utils';
 import { OverviewData, LpPoolData } from './types';
 import useBasisCash from '../../hooks/useBasisCash';
 import config from '../../config';
+import useTreasuryAllocationTimes from '../../hooks/useTreasuryAllocationTimes';
+import moment from 'moment';
+import ProgressCountdown from './components/ProgressCountdown';
+import useBondOraclePriceInLastTWAP from '../../hooks/useBondOraclePriceInLastTWAP';
+import { getDisplayBalance } from '../../utils/formatBalance';
 
 const Info: React.FC = () => {
     const basisCash = useBasisCash();
     const instance = axios.create();
+
+    let cashPrice = useBondOraclePriceInLastTWAP();
+    const isCashPriceable = useMemo(() => Number(cashPrice) < 1.05, [cashPrice]);
+    
+    const { prevAllocation, nextAllocation } = useTreasuryAllocationTimes();
+    const prevEpoch = useMemo(
+        () =>
+        nextAllocation.getTime() <= Date.now()
+            ? moment().utc().startOf('day').toDate()
+            : prevAllocation,
+        [prevAllocation, nextAllocation],
+    );
+
+    const nextEpoch = useMemo(() => moment(prevEpoch).add(6, 'hours').toDate(), [prevEpoch]);
   
-    const [{ cash, share }, setStats] = useState<OverviewData>({});
+    const [{ cash, bond, share }, setStats] = useState<OverviewData>({});
     const fetchStats = useCallback(async () => {
-      const [cash, share] = await Promise.all([
+        const [cash, bond, share] = await Promise.all([
         basisCash.getCashStatFromUniswap(),
+        basisCash.getBondStat(),
         basisCash.getShareStat(),
-      ]);
-      setStats({ cash, share });
+        ]);
+        if (Date.now() < config.bondLaunchesAt.getTime()) {
+        bond.priceInDAI = '0.00';
+        }
+        setStats({ cash, bond, share });
     }, [basisCash, setStats]);
 
-    const [{ pool2, pool3 }, setPool] = useState<LpPoolData>({});
+    const [{ pool2, pool3, treasury, bxcUnstaked, boardroom, bxsUnstaked }, setPool] = useState<LpPoolData>({});
     const fetchLPPool = useCallback(async() => {
         const data = await instance.get(apiUrl + '/bxc/num')
         const pool2 = data.data.data[0].balance
         const pool3 = data.data.data[1].balance
-        setPool({ pool2, pool3 })
+        const treasury = data.data.data[0].treasury
+        const bxcUnstaked = data.data.data[0].unstaked
+        const boardroom = data.data.data[1].boardroom
+        const bxsUnstaked = data.data.data[1].unstaked
+        setPool({ pool2, pool3, treasury, bxcUnstaked, boardroom, bxsUnstaked })
     }, [setPool])
 
     const [arr, setApyTvl] = useState<Array<any>>([]);
@@ -57,7 +84,12 @@ const Info: React.FC = () => {
                     <StyledFlexBanner>
                         <StyledDiv>
                             <StyledSubtitle>Next Epoch:</StyledSubtitle>
-                            <StyledMinTitle>There is expected to be no supply increase based on the current BXC TWAP of $0.000 .</StyledMinTitle>
+                            {
+                                isCashPriceable ?
+                                <StyledMinTitle>There is expected to be no supply increase based on the current BXC TWAP of ${getDisplayBalance(cashPrice, 18, 2)} .</StyledMinTitle> :
+                                <StyledMinTitle>There is expected to be supply increase based on the current BXC TWAP of ${getDisplayBalance(cashPrice, 18, 2)} .</StyledMinTitle>
+                            }
+                            
                             {/*<StyledMinTitle style="display: none;">The supply will be increased 0.000 based on the current BXC TWAP of $0.000 .Returning NaN BXC per BXS</StyledMinTitle>*/}
                         </StyledDiv>
                     </StyledFlexBanner>
@@ -67,7 +99,13 @@ const Info: React.FC = () => {
                         <StyledTotalLeftLi>
                             <StyledSection>
                                 <StyledInfoBoxH3>Next Epoch</StyledInfoBoxH3>
-                                <StyledInfoTotalBoxP>-</StyledInfoTotalBoxP>
+                                <StyledInfoTotalBoxP1>
+                                <ProgressCountdown
+                                        base={prevEpoch}
+                                        deadline={nextEpoch}
+                                        description="Next Epoch"
+                                    />
+                                </StyledInfoTotalBoxP1>
                             </StyledSection>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC Spot Price</StyledInfoBoxH3>
@@ -77,7 +115,7 @@ const Info: React.FC = () => {
                         <StyledTotalRightLi>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC TWAP Price</StyledInfoBoxH3>
-                                <StyledInfoTotalBoxP>-</StyledInfoTotalBoxP>
+                                <StyledInfoTotalBoxP>${getDisplayBalance(cashPrice, 18, 2)}</StyledInfoTotalBoxP>
                             </StyledSection>
                             <StyledSection>
                                 <StyledInfoBoxH3>BXC Supply</StyledInfoBoxH3>
@@ -94,7 +132,7 @@ const Info: React.FC = () => {
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>BXB Supply:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>{bond?.totalSupply}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                         </StyledLeftLi>
                         <StyledRightLi>
@@ -105,7 +143,7 @@ const Info: React.FC = () => {
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>BXB Price:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>${bond?.priceInDAI}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                         </StyledRightLi>
                     </StyledOtherMsg>
@@ -114,11 +152,11 @@ const Info: React.FC = () => {
                             <StyledInfoBoxH3>BXC Metrics</StyledInfoBoxH3>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>Treasury BXC:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>{treasury}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>Unstaked BXC:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>{bxcUnstaked}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                         </StyledLeftLi>
                         <StyledRightLi>
@@ -137,11 +175,11 @@ const Info: React.FC = () => {
                             <StyledInfoBoxH3>BXS Metrics</StyledInfoBoxH3>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>Boardroom BXS:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>{boardroom}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                             <StyledOtherMsgSection>
                                 <StyledInfoBoxP>Unstaked BXS:</StyledInfoBoxP>
-                                <StyledInfoBoxNum>-</StyledInfoBoxNum>
+                                <StyledInfoBoxNum>{bxsUnstaked}</StyledInfoBoxNum>
                             </StyledOtherMsgSection>
                         </StyledLeftLi>
                         <StyledRightLi>
@@ -260,6 +298,7 @@ const StyledTotalMsg = styled.ul`
 
 const StyledTotalLeftLi = styled.li`
    margin-right: 50px;
+   height: 67px;
    font-size: 16px;
     color: #fff;
     flex: 1 1 0%;
@@ -275,6 +314,7 @@ const StyledTotalLeftLi = styled.li`
 const StyledTotalRightLi = styled.li`
    margin-left: 50px;
    font-size: 16px;
+   height: 67px;
     color: #fff;
     flex: 1 1 0%;
     flex-direction: row;
@@ -339,11 +379,20 @@ const StyledInfoBoxP = styled.p`
     font-size: 16px;
     margin-bottom:0
 `
+const StyledInfoTotalBoxP1 = styled.p`
+    color: #fff;
+    margin-top: 5px;
+    font-size: 16px;
+    margin-bottom:0;
+    @media (max-width: 768px) {
+        margin-top: 0px;
+     }
+`
 const StyledInfoTotalBoxP = styled.p`
     color: #fff;
     margin-top: 5px;
     font-size: 16px;
-    margin-bottom:0
+    margin-bottom:0;
 `
 
 const StyledInfoBoxNum = styled.p`

@@ -87,6 +87,17 @@ const Boardroom: React.FC = () => {
             description=""
             descriptionLink=""
           />
+          <StyledBoardroomTip>
+            <StyledBoardroomTipItem>
+              1. Each Epoch time is 6 hours. The new BXC is allocated according to the proportion of BXS pledge in Boardroom.
+            </StyledBoardroomTipItem>
+            <StyledBoardroomTipItem>
+              2. Each time a BXS pledger claims BXC rewards, it will lock up for 4 epochs before the new BXC rewards can be claimed.
+            </StyledBoardroomTipItem>
+            <StyledBoardroomTipItem>
+              3. Each time a BXS pledger stakes or unstakes BXS, it will lock up for 6 epochs before the remaining BXS can be unstaked. However, BXS can be staked at any time.
+            </StyledBoardroomTipItem>
+          </StyledBoardroomTip>
         </Page>
       </Switch>
     );
@@ -102,6 +113,7 @@ const Boardroom: React.FC = () => {
               title="Join X-Men Boardroom"
               subtitle="Stake BXS for X-Men Inflationary Rewards"
               subtitle1="Max Inflation 4% per Epoch"
+              boardoom={true}
             />
             {migrateNotice}
             <StyledHeader>
@@ -154,6 +166,17 @@ const Boardroom: React.FC = () => {
                   <Spacer size="lg" />
                 </>
               )}
+              <StyledBoardroomTip>
+            <StyledBoardroomTipItem>
+              1. Each Epoch time is 6 hours. The new BXC is allocated according to the proportion of BXS pledge in Boardroom.
+            </StyledBoardroomTipItem>
+            <StyledBoardroomTipItem>
+              2. Each time a BXS pledger claims BXC rewards, it will lock up for 4 epochs before the new BXC rewards can be claimed.
+            </StyledBoardroomTipItem>
+            <StyledBoardroomTipItem>
+              3. Each time a BXS pledger stakes or unstakes BXS, it will lock up for 6 epochs before the remaining BXS can be unstaked. However, BXS can be staked at any time.
+            </StyledBoardroomTipItem>
+          </StyledBoardroomTip>
             </StyledBoardroom>
           </>
         ) : (
@@ -172,6 +195,24 @@ const UnlockWallet = () => {
     </Center>
   );
 };
+
+const StyledBoardroomTip = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+  font-size: 16px;
+  color: #bdbdbd;
+  padding: 10px 20px;
+  border: 1px solid #bdbdbd;
+  border-radius: 12px;
+  margin-top: 40px;
+  @media (max-width: 768px) {
+    width: 80%;
+    font-size: 14px;
+  }
+`;
+const StyledBoardroomTipItem = styled.div`
+`;
 
 const StyledBoardroom = styled.div`
   align-items: center;
