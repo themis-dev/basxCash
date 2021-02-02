@@ -26,7 +26,12 @@ import useWithdrawFromBoardroom from '../../../hooks/useWithdrawFromBoardroom';
 import useBoardroomVersion from '../../../hooks/useBoardroomVersion';
 import useRedeemOnBoardroom from '../../../hooks/useRedeemOnBoardroom';
 
-const Stake: React.FC = () => {
+
+interface StakeProps {
+  withdrawAllocation?: Date;
+}
+
+const Stake: React.FC<StakeProps> = ({withdrawAllocation}) => {
   const basisCash = useBasisCash();
   const boardroomVersion = useBoardroomVersion();
   const [approveStatus, approve] = useApprove(
@@ -61,6 +66,7 @@ const Stake: React.FC = () => {
         onDismissWithdraw();
       }}
       tokenName={'BasisX Share'}
+      withdrawAllocation={withdrawAllocation}
     />,
   );
 
@@ -108,11 +114,13 @@ const Stake: React.FC = () => {
   );
 };
 
+
 const StyledCardHeader = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
 `;
+
 const StyledCardActions = styled.div`
   display: flex;
   justify-content: center;

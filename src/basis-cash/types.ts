@@ -33,3 +33,9 @@ export type TreasuryAllocationTime = {
   prevAllocation: Date;
   nextAllocation: Date;
 }
+
+export type BoardroomAllocationTime = {
+  rewardAllocation: Date;
+  withdrawAllocation: Date;
+  dropoutAllocation: Date;
+}

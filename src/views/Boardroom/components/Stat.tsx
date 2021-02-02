@@ -3,16 +3,22 @@ import styled from 'styled-components';
 import Card from '../../../components/Card';
 
 interface StatProps {
-  icon: string;
+  icon?: string;
   title: string;
   description: string;
+  img?: string;
 }
 
-const Stat: React.FC<StatProps> = ({ icon, title, description }) => {
+const Stat: React.FC<StatProps> = ({ icon, title, description, img }) => {
   return (
     <Card>
       <StyledCardContentInner>
-        <StyledIcon>{icon}</StyledIcon>
+        {
+          icon && <StyledIcon>{icon}</StyledIcon>
+        }
+        {
+          img && <img src={img} alt="" />
+        }
         <StyledTextWrapper>
           <StyledCardTitle>{title}</StyledCardTitle>
           <StyledDesc>{description}</StyledDesc>

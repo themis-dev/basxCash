@@ -16,7 +16,7 @@ import bankIcon from '../../assets/img/bank.png'
 
 
 const Bank: React.FC = () => {
-  useEffect(() => window.scrollTo(0, 0));
+  // useEffect(() => window.scrollTo(0, 0));
 
   const { bankId } = useParams();
   const bank = useBank(bankId);

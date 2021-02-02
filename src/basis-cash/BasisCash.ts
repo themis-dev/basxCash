@@ -1,6 +1,6 @@
 import { Fetcher, Route, Token } from 'medxswap-sdk';
 import { Configuration } from './config';
-import { ContractName, TokenStat, TreasuryAllocationTime } from './types';
+import { ContractName, TokenStat, TreasuryAllocationTime, BoardroomAllocationTime } from './types';
 import { BigNumber, Contract, ethers, Overrides } from 'ethers';
 import { decimalToBalance } from './ether-utils';
 import { TransactionResponse } from '@ethersproject/providers';
@@ -388,5 +388,22 @@ export class BasisCash {
     const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
     const prevAllocation = new Date(nextAllocation.getTime() - period.toNumber() * 1000);
     return { prevAllocation, nextAllocation };
+  }
+
+  async getTreasuryCountdown(address: string) {
+    console.log(address)
+    const { BoardroomNew } = this.contracts;
+    const nextEpochTimestamp = await BoardroomNew.nextEpochPoint(address);
+    const rewardAllocation = new Date(nextEpochTimestamp[0].mul(1000).toNumber());
+    const withdrawAllocation = new Date(nextEpochTimestamp[1].mul(1000).toNumber());
+    let dropoutAllocation: Date
+    if (nextEpochTimestamp[0].mul(1000).toNumber() > nextEpochTimestamp[1].mul(1000).toNumber()) {
+      dropoutAllocation = new Date(nextEpochTimestamp[0].mul(1000).toNumber());
+    } else {
+      dropoutAllocation = new Date(nextEpochTimestamp[1].mul(1000).toNumber());
+    }
+    console.log(rewardAllocation)
+    console.log(withdrawAllocation)
+    return { rewardAllocation, withdrawAllocation, dropoutAllocation };
   }
 }

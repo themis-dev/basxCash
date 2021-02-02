@@ -6,8 +6,7 @@ const Nav: React.FC = () => {
     <StyledNav>
       <StyledLink href= {buyBAS} target="_blank">Get BXS</StyledLink>
       <StyledLink href= {buyBAC} target="_blank">Get BXC</StyledLink>
-      {/* <StyledLink >Get BXS</StyledLink> */}
-      {/* <StyledLink >Get BXC</StyledLink> */}
+      <StyledLink href="https://docs.basisx.io" target="_blank">Docs</StyledLink>
       <StyledLink href="https://github.com/basisx-io/contracts/blob/main/README.md" target="_blank">GitHub</StyledLink>
       <StyledLink href="https://twitter.com/x_basis" target="_blank">Twitter</StyledLink>
       <StyledLink href="https://t.me/BasisxOfficial" target="_blank">Telegram</StyledLink>
@@ -22,6 +21,7 @@ const StyledNav = styled.nav`
   align-items: center;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `
 
 const StyledLink = styled.a`

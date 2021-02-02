@@ -11,11 +11,16 @@ import CardIcon from '../../../components/CardIcon';
 import useHarvestFromBoardroom from '../../../hooks/useHarvestFromBoardroom';
 import useEarningsOnBoardroom from '../../../hooks/useEarningsOnBoardroom';
 import { getDisplayBalance } from '../../../utils/formatBalance';
+import ProgressCountdowns from './ProgressCountdowns'
 
-const Harvest: React.FC = ({}) => {
+interface HarProps {
+  rewardAllocation?: Date;
+}
+
+const Harvest: React.FC<HarProps> = ({rewardAllocation}) => {
   const { onReward } = useHarvestFromBoardroom();
   const earnings = useEarningsOnBoardroom();
-
+  const flag = new Date().getTime() < rewardAllocation.getTime()
   return (
     <Card>
       <CardContent>
@@ -27,9 +32,25 @@ const Harvest: React.FC = ({}) => {
             <Value value={getDisplayBalance(earnings)} />
             <Label text="BasisX Cash Earned" />
           </StyledCardHeader>
-          <StyledCardActions>
-            <Button onClick={onReward} text="Claim Reward" disabled={earnings.eq(0)} />
-          </StyledCardActions>
+          {
+            flag ? 
+            <StyledCardActionsCountDown>
+              <StyledDivItem1>Claim Reward</StyledDivItem1>
+              <ProgressCountdowns
+              deadline={rewardAllocation}
+              description="Next Epoch"
+              />
+            </StyledCardActionsCountDown> :
+            <StyledCardActions>
+              <Button onClick={onReward} text="Claim Reward" disabled={earnings.eq(0)} />
+            </StyledCardActions>
+          }
+          {/* <Button onClick={onReward} text="Claim Reward" disabled={earnings.eq(0)} /> */}
+            {/* <StyledDivItem1>Claim Reward</StyledDivItem1>
+            <ProgressCountdowns
+                deadline={rewardAllocation}
+                description="Next Epoch"
+            /> */}
         </StyledCardContentInner>
       </CardContent>
     </Card>
@@ -40,6 +61,36 @@ const StyledCardHeader = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+`;
+const StyledDivItem1 = styled.div`
+  font-size: 18px;
+  color: ${(props) => props.theme.color.grey[400]};
+`;
+const StyledDivItem2 = styled.div`
+  font-size: 16px;
+`;
+const StyledCardActionsCountDown = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: ${(props) => props.theme.spacing[6]}px;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: rgb(62, 49, 31);
+  border: 0px;
+  border-radius: 12px;
+  color: rgb(244, 220, 39);
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  height: 56px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  outline: none;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 65%;
+  flex-direction: column;
+  font-size: 16px;
 `;
 const StyledCardActions = styled.div`
   display: flex;
