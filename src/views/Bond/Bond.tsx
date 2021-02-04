@@ -34,14 +34,14 @@ const Bond: React.FC = () => {
   const addPopup = useAddPopup();
   const handleBuyBonds = useCallback(
     async (amount: string) => {
-      const tx = await basisCash.buyBonds(amount);
-      if (tx) {
+      try {
+        const tx = await basisCash.buyBonds(amount);
         const bondAmount = Number(amount) / Number(getDisplayBalance(cashPrice));
         addTransaction(tx, {
           summary: `Buy ${bondAmount.toFixed(2)} BXB with ${amount} BXC`,
         });
-      } else {
-        const message = `error`;
+      } catch (error) {
+        const message = error.message;
         addPopup({ error: { message, stack: '' } });
       }
     },
@@ -56,7 +56,7 @@ const Bond: React.FC = () => {
     [basisCash, addTransaction],
   );
   const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
-  const isBondPurchasable = useMemo(() => Number(bondStat?.priceInDAI) < 0.95, [bondStat]);
+  const isBondPurchasable = useMemo(() => Number(bondStat?.priceInDAI) < 0.9025, [bondStat]);
 
   // console.log(isBondPurchasable)
 

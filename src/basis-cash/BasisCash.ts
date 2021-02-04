@@ -212,8 +212,7 @@ export class BasisCash {
     try {
       return await Treasury.buyBonds(decimalToBalance(amount), await this.getBondOraclePriceInLastTWAP());
     } catch (error) {
-      console.log(error)
-      return null
+      throw new Error(error.data.message);
     }
   }
 
